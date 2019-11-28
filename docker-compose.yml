@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  php:
+    build: ./docker/php
+    container_name: scanup-php
+    restart: on-failure
+
+  web:
+    build: ./docker/nginx
+    container_name: scanup-nginx
+    restart: on-failure
+    depends_on:
+      - php
+
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080

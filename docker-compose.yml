@@ -15,11 +15,13 @@ services:
 
   db:
     image: postgres
+    restart: on-failure
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
 
   adminer:
     image: adminer
+    restart: on-failure
     ports:
       - 8080:8080

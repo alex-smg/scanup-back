@@ -15,6 +15,7 @@ services:
 
   db:
     image: postgres
+    container_name: scanup-db
     restart: on-failure
     environment:
       POSTGRES_USER: admin
@@ -22,6 +23,7 @@ services:
 
   adminer:
     image: adminer
+    container_name: scanup-adminer
     restart: on-failure
     ports:
       - 8080:8080

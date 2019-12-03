@@ -6,13 +6,6 @@ services:
     container_name: scanup-php
     restart: on-failure
 
-  web:
-    build: ./docker/nginx
-    container_name: scanup-nginx
-    restart: on-failure
-    depends_on:
-      - php
-
   db:
     image: postgres
     container_name: scanup-db
@@ -20,6 +13,14 @@ services:
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
+
+  web:
+    build: ./docker/nginx
+    container_name: scanup-nginx
+    restart: on-failure
+    depends_on:
+      - php
+      - db
 
   adminer:
     image: adminer

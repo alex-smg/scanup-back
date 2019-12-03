@@ -2,7 +2,11 @@ FROM php:7.3-fpm-alpine
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-RUN apk update && pecl install xdebug
+RUN set -ex \
+  	&& apk --no-cache add \
+	postgresql-dev \
+	$PHPIZE_DEPS \
+	libpq-dev \
+	&& pecl install xdebug
 
-RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql
-RUN docker-php-ext-install pdo pdo_pgsql pgsql intl opcache
+RUN docker-php-ext-install pdo pdo_pgsql

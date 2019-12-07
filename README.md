@@ -1,20 +1,50 @@
 # Scanup Back
 
+![Scan'up logo](http://scanup.fr/wp-content/uploads/2017/01/ScanUp_logo_2.1_small.png)
+
 ## Getting started
 
 Before installing the project, be sure to have [Docker](https://docs.docker.com/install/) and [docker-compose](https://docs.docker.com/compose/install/)
 
-Start the container
+Copy/paste your `.env.example` and create the file `.env`
+```bash
+cp .env.example .env
+```
+
+Generate the application key
+```bash
+make bash
+php artisan key:generate
+```
+
+Run the containers
 ```bash
 make start
 ```
 
-Display logs 
+## Urls
+
+* [Application](http://localhost/)
+* [Adminer](http://localhost:8080/) You can get the credentials in the Dockerfile
+
+## Commands
+
+Run the containers
 ```bash
-make logs
+make start
 ```
 
-Stop the container
+Run the container in the background
+```bash
+make start -d
+```
+
+Use bash inside the container `scanup-php`
+```bash
+make bash
+```
+
+Stop/Remove the containers
 ```bash
 make down
 ```

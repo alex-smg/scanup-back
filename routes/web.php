@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/ntm', function () {
-    return 'string';
+Route::get('/', function () {
+    return view('welcome');
 });

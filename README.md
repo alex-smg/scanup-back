@@ -25,7 +25,7 @@ make start
 ## Urls
 
 * [Application](http://localhost/)
-* [Adminer](http://localhost:8080/) You can get the credentials in the Dockerfile
+* [Adminer](http://localhost:8080/) You can get the credentials in the file docker-compose file
 
 ## Commands
 

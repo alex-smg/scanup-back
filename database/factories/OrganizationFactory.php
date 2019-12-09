@@ -4,11 +4,14 @@
 use App\Organization;
 use Faker\Generator as Faker;
 
-$factory->define(Organization::class, function (Faker $faker) {
+$status = ['company', 'brand', 'organization'];
+
+
+$factory->define(Organization::class, function (Faker $faker) use ($status) {
     return [
-        'last_name' => $faker->lastName,
-        'first_name' => $faker->firstName($gender = null),
-        'email' => $faker->unique()->safeEmail,
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+        'name' => $faker->name,
+        'description' => $faker->text($maxNbChars = 200),
+        'logo' => $faker->imageUrl($width = 640, $height = 480),
+        'status' => $status[rand(0, 2)]
     ];
 });

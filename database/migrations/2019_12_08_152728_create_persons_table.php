@@ -21,7 +21,6 @@ class CreatePersonsTable extends Migration
             $table->string('password');
             $table->integer('organization_id')->unsigned();
             $table->foreign('organization_id')->references('id')->on('organizations');
-            $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
         });

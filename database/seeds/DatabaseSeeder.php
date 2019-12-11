@@ -13,9 +13,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        factory(Organization::class, 24)->create()->each(function($organization, $key) {
+        factory(Organization::class, 22)->create()->each(function($organization, $key) {
             if ($key % 2 === 0 || $key % 3 === 0 ) {
-                $organization->parent = factory(Organization::class)->make();
+                $organization->parent()->save(factory(Organization::class)->create());
             }
         });
         factory(Person::class, 10)->create();

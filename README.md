@@ -11,12 +11,6 @@ Copy/paste your `.env.example` and create the file `.env`
 cp .env.example .env
 ```
 
-Generate the application key
-```bash
-make bash
-php artisan key:generate
-```
-
 Run the containers
 ```bash
 make start

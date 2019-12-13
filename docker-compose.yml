@@ -9,7 +9,7 @@ services:
       - ./:/var/www
 
   db:
-    image: postgres
+    image: postgres:11.6
     container_name: scanup-db
     restart: on-failure
     environment:

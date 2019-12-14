@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Organization extends Model
 {
-    protected $fillable = ['name', 'description', 'logo', 'status'];
+    protected $fillable = ['name', 'description', 'logo', 'status', 'parent_id'];
 
     public function parent()
     {

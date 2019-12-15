@@ -21,11 +21,19 @@ class OrganizationController extends Controller
         return OrganizationResource::collection(DB::table('organizations')->paginate(10));
     }
 
+    /**
+     * @param int $id
+     * @return OrganizationResource
+     */
     public function show(int $id): OrganizationResource
     {
         return new OrganizationResource(Organization::find($id));
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Support\MessageBag
+     */
     public function store(Request $request)
     {
         $validation = Validator::make($request->all(), [
@@ -40,5 +48,17 @@ class OrganizationController extends Controller
         $organization = Organization::create($request->only(['name', 'description', 'logo', 'status', 'parent_id']));
 
         return Response::json($organization, 201);
+    }
+
+    /**
+     * @param Organization $organization
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
+    public function destroy(Organization $organization)
+    {
+        $organization->delete();
+
+        return Response::json([], 204);
     }
 }

@@ -15,10 +15,7 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-
-
-
-$router->group(['prefix' => 'api'], function () use ($router) {
+$router->group(['prefix' => 'api'], function() use($router) {
 
     $router->get('/organizations', 'OrganizationController@index');
     $router->get('/organizations/{id}', 'OrganizationController@show');

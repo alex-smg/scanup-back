@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Organization;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\{Response, DB, Validator};
+use Illuminate\Support\Facades\{Response, DB, URL, Validator};
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use App\Http\Resources\Organization as OrganizationResource;
+use Psy\Util\Json;
 
 class OrganizationController extends Controller
 {
@@ -32,11 +32,16 @@ class OrganizationController extends Controller
     }
 
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Support\MessageBag
+     * @throws \Exception
+     */
     public function store(Request $request)
     {
         $validation = Validator::make($request->all(), [
             'name' => 'required|string|min:1|max:255',
-//            'logo' => 'image'
+            'logo' => 'image',
             'status' => ['required', Rule::in(['organization', 'company', 'brand'])]
         ]);
 
@@ -44,10 +49,19 @@ class OrganizationController extends Controller
             return $validation->errors();
 
         if (null !== $request->input('parent_id')) {
-            $this->checkParentAndStatus($request);
+            $checkStatus = $this->checkParentAndStatus($request);
+            if (is_array($checkStatus))
+                return Response::json($checkStatus[0], key($checkStatus));
         }
 
-        $organization = Organization::create($request->only(['name', 'description', 'logo', 'status', 'parent_id']));
+        $image = $request->file('logo');
+        $imageName = 'storage/' . time().'.'.$image->getClientOriginalExtension();
+        $image->storeAs('public', $imageName);
+        URL::asset($imageName);
+
+        $dataToInsert = $request->only(['name', 'description', 'status', 'parent_id']);
+        $dataToInsert['logo'] = $imageName;
+        $organization = Organization::create($dataToInsert);
 
         return Response::json($organization, 201);
     }
@@ -57,7 +71,7 @@ class OrganizationController extends Controller
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
-    public function destroy(Organization $organization)
+    public function destroy(Organization $organization): Response
     {
         $organization->delete();
 
@@ -66,12 +80,8 @@ class OrganizationController extends Controller
 
     /**
      * Check if the parent exist and if the child status is correct according the parent status
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Exception
      */
-    private function checkParentAndStatus(Request $request): Response
+    private function checkParentAndStatus(Request $request)
     {
         $inputStatus = $request->input('status');
         if ('organization' === $inputStatus) {
@@ -79,8 +89,9 @@ class OrganizationController extends Controller
         }
 
         $parentOrganization = Organization::find($request->input('parent_id'));
-        if (null === $parentOrganization)
-            return Response::json(['error' => 'The organization parent is not found'], 404);
+        if (null === $parentOrganization) {
+            return [404 => 'The organization parent is not found'];
+        }
 
         $parentStatus = $parentOrganization->status;
         $checkStatus = false;
@@ -91,7 +102,8 @@ class OrganizationController extends Controller
         }
 
         if (!$checkStatus) {
-            return Response::json(['error' => 'The organization parent is not found'], 404);
+            return [404 => 'The organization status is not compatible with the parent status'];
         }
+
     }
 }

@@ -24,7 +24,7 @@ class Organization extends JsonResource
             'logo' => $this->logo,
             'status' => $this->status,
             'parent' => new Organization(OrganizationEntity::find($this->parent_id)),
-//            'children' => new Organization(OrganizationEntity::where('parent_id', $this->id)->first()),
+            'children' => Organization::collection(OrganizationEntity::where('parent_id', $this->id)->first()),
             'createdAt' => $this->created_at,
             'updatedAt' => $this->updated_at,
         ];

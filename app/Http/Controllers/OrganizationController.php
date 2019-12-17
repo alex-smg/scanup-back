@@ -18,7 +18,9 @@ class OrganizationController extends Controller
      */
     public function index(): AnonymousResourceCollection
     {
-        return OrganizationResource::collection(Organization::paginate(10));
+        return OrganizationResource::collection(Organization::where('parent_id', 2)->get());
+
+//            OrganizationResource::collection(Organization::paginate(10));
     }
 
     /**

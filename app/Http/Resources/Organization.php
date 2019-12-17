@@ -4,7 +4,6 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\DB;
 use App\Organization as OrganizationEntity;
 
 class Organization extends JsonResource
@@ -23,8 +22,14 @@ class Organization extends JsonResource
             'description' => $this->description,
             'logo' => $this->logo,
             'status' => $this->status,
-            'parent' => new Organization(OrganizationEntity::find($this->parent_id)),
-            'children' => Organization::collection(OrganizationEntity::where('parent_id', $this->id)->first()),
+            'parent' => $this->when(
+                null !== $this->parent_id,
+                $this->parent
+            ),
+            'children' => $this->when(
+                ($this->status === 'organization' || $this->status === 'company'),
+                $this->children
+            ),
             'createdAt' => $this->created_at,
             'updatedAt' => $this->updated_at,
         ];

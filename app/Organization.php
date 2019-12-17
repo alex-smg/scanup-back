@@ -10,6 +10,11 @@ class Organization extends Model
 
     public function parent()
     {
-        return $this->hasOne('App\Organization', 'parent_id');
+        return $this->belongsTo('App\Organization', 'parent_id');
+    }
+
+    public function children()
+    {
+        return $this->hasMany('App\Organization', 'parent_id');
     }
 }

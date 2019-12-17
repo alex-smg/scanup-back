@@ -6,11 +6,10 @@ namespace App\Http\Controllers;
 
 use App\Organization;
 use Illuminate\Validation\Rule;
-use Illuminate\Http\Request;
+use Illuminate\Http\{Request, JsonResponse};
 use Illuminate\Support\Facades\{Response, DB, URL, Validator};
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use App\Http\Resources\Organization as OrganizationResource;
-use Psy\Util\Json;
 
 class OrganizationController extends Controller
 {
@@ -19,7 +18,7 @@ class OrganizationController extends Controller
      */
     public function index(): AnonymousResourceCollection
     {
-        return OrganizationResource::collection(DB::table('organizations')->paginate(10));
+        return OrganizationResource::collection(Organization::paginate(10));
     }
 
     /**
@@ -31,17 +30,17 @@ class OrganizationController extends Controller
         return new OrganizationResource(Organization::find($id));
     }
 
-
     /**
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Support\MessageBag
+     * @return JsonResponse|\Illuminate\Support\MessageBag
      * @throws \Exception
      */
     public function store(Request $request)
     {
         $validation = Validator::make($request->all(), [
             'name' => 'required|string|min:1|max:255',
-            'logo' => 'image',
+            'logo' => 'required|image',
+            'parent_id' => 'integer',
             'status' => ['required', Rule::in(['organization', 'company', 'brand'])]
         ]);
 
@@ -67,11 +66,47 @@ class OrganizationController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @param int $id
+     * @return |\Illuminate\Support\MessageBag
+     * @throws \Exception
+     */
+    public function update(Request $request, int $id)
+    {
+        $validation = Validator::make($request->all(), [
+            'name' => 'required|string|min:1|max:255',
+            'logo' => 'image',
+            'parent_id' => 'integer',
+            'status' => ['required', Rule::in(['organization', 'company', 'brand'])]
+        ]);
+
+        if ($validation->fails())
+            return $validation->errors();
+
+        if (null !== $request->input('parent_id')) {
+            $checkStatus = $this->checkParentAndStatus($request);
+            if (is_array($checkStatus))
+                return Response::json($checkStatus[0], key($checkStatus));
+        }
+
+        $image = $request->file('logo');
+        $imageName = 'storage/' . time().'.'.$image->getClientOriginalExtension();
+        $image->storeAs('public', $imageName);
+        URL::asset($imageName);
+
+        $dataToInsert = $request->only(['name', 'description', 'status', 'parent_id']);
+        $dataToInsert['logo'] = $imageName;
+        Organization::where('id', $id)->update($dataToInsert);
+
+        return Response::json(Organization::where('id', $id)->get(), 200);
+    }
+
+    /**
      * @param Organization $organization
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
-    public function destroy(Organization $organization): Response
+    public function destroy(Organization $organization): JsonResponse
     {
         $organization->delete();
 
@@ -80,6 +115,10 @@ class OrganizationController extends Controller
 
     /**
      * Check if the parent exist and if the child status is correct according the parent status
+     *
+     * @param Request $request
+     * @return array
+     * @throws \Exception
      */
     private function checkParentAndStatus(Request $request)
     {

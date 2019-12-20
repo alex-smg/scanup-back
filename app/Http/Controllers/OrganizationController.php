@@ -50,7 +50,7 @@ class OrganizationController extends Controller
         if (null !== $request->input('parent_id')) {
             $checkStatus = $this->checkParentAndStatus($request);
             if (is_array($checkStatus))
-                return Response::json($checkStatus[0], key($checkStatus));
+                return Response::json(reset($checkStatus), key($checkStatus));
         }
 
         $image = $request->file('logo');
@@ -85,8 +85,9 @@ class OrganizationController extends Controller
 
         if (null !== $request->input('parent_id')) {
             $checkStatus = $this->checkParentAndStatus($request);
-            if (is_array($checkStatus))
-                return Response::json($checkStatus[0], key($checkStatus));
+            if (is_array($checkStatus)) {
+                return Response::json(reset($checkStatus), key($checkStatus));
+            }
         }
 
         $image = $request->file('logo');
@@ -126,10 +127,9 @@ class OrganizationController extends Controller
         if ('organization' === $inputStatus) {
             throw new \Exception('You can\'t have an entity over an organization');
         }
-
         $parentOrganization = Organization::find($request->input('parent_id'));
         if (null === $parentOrganization) {
-            return [404 => 'The organization parent is not found'];
+            return [400 => 'The organization parent is not found'];
         }
 
         $parentStatus = $parentOrganization->status;
@@ -141,7 +141,7 @@ class OrganizationController extends Controller
         }
 
         if (!$checkStatus) {
-            return [404 => 'The organization status is not compatible with the parent status'];
+            return [400 => 'The organization status is not compatible with the parent status'];
         }
 
     }

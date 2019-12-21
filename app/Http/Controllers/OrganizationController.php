@@ -103,13 +103,12 @@ class OrganizationController extends Controller
     }
 
     /**
-     * @param Organization $organization
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Exception
+     * @param int $id
+     * @return JsonResponse
      */
-    public function destroy(Organization $organization): JsonResponse
+    public function destroy(int $id): JsonResponse
     {
-        $organization->delete();
+        DB::table('organizations')->where('id', '=', $id)->delete();
 
         return Response::json([], 204);
     }

@@ -20,7 +20,7 @@ class CreateOrganizationsTable extends Migration
             $table->string('logo');
             $table->enum('status', ['organization', 'company', 'brand']);
             $table->integer('parent_id')->unsigned()->nullable();
-            $table->foreign('parent_id')->references('id')->on('organizations');
+            $table->foreign('parent_id')->references('id')->on('organizations')->onDelete('set null');
             $table->timestamps();
         });
     }

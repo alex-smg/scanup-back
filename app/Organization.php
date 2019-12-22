@@ -6,10 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Organization extends Model
 {
-    protected $fillable = ['name', 'description', 'logo', 'status'];
+    protected $fillable = ['name', 'description', 'logo', 'status', 'parent_id'];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function parent()
     {
-        return $this->hasOne('App\Organization', 'parent_id');
+        return $this->belongsTo('App\Organization', 'parent_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function children()
+    {
+        return $this->hasMany('App\Organization', 'parent_id');
     }
 }

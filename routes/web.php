@@ -14,3 +14,14 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->group(['prefix' => 'api'], function() use($router) {
+
+    $router->get('/organizations', 'OrganizationController@index');
+    $router->get('/organizations/{id}', 'OrganizationController@show');
+    $router->post('/organizations', 'OrganizationController@store');
+    $router->put('/organizations/{id}', 'OrganizationController@update');
+    $router->delete('/organizations/{id}', 'OrganizationController@destroy');
+
+});
+

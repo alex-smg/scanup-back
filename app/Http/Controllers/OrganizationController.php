@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Utils\Upload;
 use App\Organization;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\{Request, JsonResponse};
@@ -13,6 +14,16 @@ use App\Http\Resources\Organization as OrganizationResource;
 
 class OrganizationController extends Controller
 {
+    /**
+     * @var Upload
+     */
+    protected $upload;
+
+    public function __construct(Upload $upload)
+    {
+        $this->upload = $upload;
+    }
+
     /**
      * @return AnonymousResourceCollection
      */
@@ -53,10 +64,7 @@ class OrganizationController extends Controller
                 return Response::json(reset($checkStatus), key($checkStatus));
         }
 
-        $image = $request->file('logo');
-        $imageName = 'storage/' . time().'.'.$image->getClientOriginalExtension();
-        $image->storeAs('public', $imageName);
-        URL::asset($imageName);
+        $imageName = $this->upload->storeAsset($request, 'logo');
 
         $dataToInsert = $request->only(['name', 'description', 'status', 'parent_id']);
         $dataToInsert['logo'] = $imageName;
@@ -90,12 +98,9 @@ class OrganizationController extends Controller
             }
         }
 
-        $image = $request->file('logo');
-        $imageName = 'storage/' . time().'.'.$image->getClientOriginalExtension();
-        $image->storeAs('public', $imageName);
-        URL::asset($imageName);
-
         $dataToInsert = $request->only(['name', 'description', 'status', 'parent_id']);
+        $imageName = $this->upload->storeAsset($request, 'logo');
+
         $dataToInsert['logo'] = $imageName;
         Organization::where('id', $id)->update($dataToInsert);
 

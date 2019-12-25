@@ -1,14 +1,20 @@
 <?php
 
-namespace App\Utils;
+declare(strict_types=1);
 
+namespace App\Utils;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 
 class Upload
 {
-    public function storeAsset(Request $request, string $keyName)
+    /**
+     * @param Request $request
+     * @param string $keyName
+     * @return string
+     */
+    public function storeAsset(Request $request, string $keyName): string
     {
         $image = $request->file($keyName);
         $imageName = 'storage/' . time().'.'.$image->getClientOriginalExtension();

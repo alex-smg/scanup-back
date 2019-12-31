@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
 
 class PersonController extends Controller
 {
@@ -28,6 +29,23 @@ class PersonController extends Controller
     public function show(int $id): PersonResource
     {
         return new PersonResource(Person::find($id));
+    }
+
+    public function store(Request $request)
+    {
+        $validation = Validator::make($request->all(), [
+            'first_name' => 'required|string|min:1|max:255',
+            'last_name' => 'required|image',
+            'email' => 'integer',
+            'organization_id' => ['required']
+        ]);
+
+        if ($validation->fails())
+            return $validation->errors();
+
+        $person = $request->only(['name', 'description', 'status', 'parent_id']);
+
+        return Response::json($person, 201);
     }
 
     /**

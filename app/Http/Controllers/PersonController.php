@@ -31,6 +31,10 @@ class PersonController extends Controller
         return new PersonResource(Person::find($id));
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResponse|\Illuminate\Support\MessageBag
+     */
     public function store(Request $request)
     {
         $validation = Validator::make($request->all(), [

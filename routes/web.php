@@ -35,5 +35,7 @@ $router->group(['prefix' => 'api'], function() use($router) {
     $router->put('/persons/{id}', 'PersonController@update');
     $router->delete('/persons/{id}', 'PersonController@destroy');
 
+    $router->post('/login', 'PersonController@login');
+
 });
 

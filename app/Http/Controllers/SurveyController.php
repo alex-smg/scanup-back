@@ -22,4 +22,13 @@ class SurveyController extends Controller
         return SurveyResource::collection(Survey::paginate(10));
     }
 
+    /**
+     * @param int $id
+     * @return SurveyResource
+     */
+    public function show(int $id): SurveyResource
+    {
+        return new SurveyResource(Survey::find($id));
+    }
+
 }

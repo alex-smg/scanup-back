@@ -22,7 +22,11 @@ $router->group(['prefix' => 'api'], function() use($router) {
     $router->post('/organizations', 'OrganizationController@store');
     $router->put('/organizations/{id}', 'OrganizationController@update');
     $router->delete('/organizations/{id}', 'OrganizationController@destroy');
+
+    // SURVEY ROUTES
     $router->get('/surveys', 'SurveyController@index');
+    $router->get('/surveys/{id}', 'SurveyController@show');
+
 
 });
 

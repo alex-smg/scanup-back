@@ -41,15 +41,17 @@ class PersonController extends Controller
     {
         $validation = Validator::make($request->all(), [
             'first_name' => 'required|string|min:1|max:255',
-            'last_name' => 'required|image',
-            'email' => 'integer',
+            'last_name' => 'required|string',
+            'email' => 'required|email',
+            'password' => 'required|string',
             'organization_id' => 'required'
         ]);
 
         if ($validation->fails())
             return $validation->errors();
 
-        $person = $request->only(['name', 'description', 'status', 'parent_id']);
+        $person = $request->only(['first_name', 'last_name', 'email', 'organization_id', 'password']);
+        Person::create($person);
 
         return Response::json($person, 201);
     }
@@ -63,19 +65,20 @@ class PersonController extends Controller
     {
         $validation = Validator::make($request->all(), [
             'first_name' => 'required|string|min:1|max:255',
-            'last_name' => 'required|image',
+            'last_name' => 'required',
             'email' => 'required|email|max:255',
-            'organization_id' => 'required'
+            'password' => 'required|string',
+            'organization_id' => 'required',
         ]);
 
         if ($validation->fails())
             return $validation->errors();
 
-        $dataToInsert = $request->only(['name', 'description', 'status', 'parent_id']);
+        $person = $request->only(['first_name', 'last_name', 'email', 'organization_id', 'password']);
 
-        Person::where('id', $id)->update($dataToInsert);
+        Person::where('id', $id)->update($person);
 
-        return Response::json(Person::where('id', $id)->get(), 200);
+        return Response::json(Person::where('id', $id)->first(), 200);
     }
 
     /**
@@ -97,13 +100,13 @@ class PersonController extends Controller
     {
         $validation = Validator::make($request->all(), [
             'email' => 'required|string|email|min:2|max:255',
-            'password' => 'required|string|min:6|max:255'
+            'password' => 'required|string|min:2|max:255'
         ]);
 
         if ($validation->fails())
             return $validation->errors();
 
-        if ($this->guard()->attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
+        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
             $user = $this->guard()->user();
             $username = $user->email;
             $password = $request->input('password');
@@ -115,13 +118,4 @@ class PersonController extends Controller
 
         return Response::json(['error' => 'Unauthenticated user'], 401);
     }
-
-    /**
-     * @return Auth
-     */
-    private function guard(): Auth
-    {
-        return Auth::guard('api');
-    }
-
 }

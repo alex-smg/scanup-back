@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\Person as PersonResource;
@@ -50,7 +51,8 @@ class PersonController extends Controller
         if ($validation->fails())
             return $validation->errors();
 
-        $person = $request->only(['first_name', 'last_name', 'email', 'organization_id', 'password']);
+        $person = $request->only(['first_name', 'last_name', 'email', 'organization_id']);
+        $person['password'] = Hash::make($request->input('password'));
         Person::create($person);
 
         return Response::json($person, 201);

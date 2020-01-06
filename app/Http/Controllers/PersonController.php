@@ -77,6 +77,7 @@ class PersonController extends Controller
             return $validation->errors();
 
         $person = $request->only(['first_name', 'last_name', 'email', 'organization_id', 'password']);
+        $person['password'] = Hash::make($request->input('password'));
 
         Person::where('id', $id)->update($person);
 

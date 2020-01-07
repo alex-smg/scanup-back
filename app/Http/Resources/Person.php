@@ -15,10 +15,16 @@ class Person extends Resource
     public function toArray($request)
     {
         return [
-            'first_name' => $this->first_name,
-            'last_name' => $this->last_name,
+            'id' => $this->id,
+            'firstName' => $this->first_name,
+            'lastName' => $this->last_name,
             'email' => $this->email,
-            'organization_id' => $this->organization,
+            'organization' => $this->when(
+        null !== $this->organization_id,
+                $this->organization
+            ),
+            'createdAt' => $this->created_at,
+            'updatedAt' => $this->updated_at,
         ];
     }
 }

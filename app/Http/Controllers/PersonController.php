@@ -5,13 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Person;
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\{Request, JsonResponse};
+use Illuminate\Support\Facades\{Auth, DB, Hash, Response, Validator};
 use App\Http\Resources\Person as PersonResource;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "27744c4a-7515-403c-987c-ecbbda59ca29",
+		"_postman_id": "df03895e-725b-45c8-8030-69ec0b8b0c20",
 		"name": "Scan'up",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -99,12 +99,7 @@
 									"value": "PUT",
 									"type": "text"
 								}
-							],
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							]
 						},
 						"url": {
 							"raw": "http://localhost/api/organizations/1",
@@ -186,9 +181,180 @@
 					},
 					"response": []
 				}
+			]
+		},
+		{
+			"name": "survey",
+			"item": [
+				{
+					"name": "Update a survey",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "testUpdate",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/Users/alexandresmagghe/Documents/box.png"
+								},
+								{
+									"key": "brand_id",
+									"value": "13",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "_method",
+									"value": "PUT",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/api/surveys/11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"surveys",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add a survey",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "testPost",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/Users/alexandresmagghe/Documents/logo.png"
+								},
+								{
+									"key": "brand_id",
+									"value": "11",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "fake description",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/api/surveys",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"surveys"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all surveys",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/surveys",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"surveys"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a survey",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/surveys/11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"surveys",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete survey",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/surveys/85",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"surveys",
+								"85"
+							]
+						}
+					},
+					"response": []
+				}
 			],
 			"protocolProfileBehavior": {}
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }

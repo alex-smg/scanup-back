@@ -23,5 +23,13 @@ $router->group(['prefix' => 'api'], function() use($router) {
     $router->put('/organizations/{id}', 'OrganizationController@update');
     $router->delete('/organizations/{id}', 'OrganizationController@destroy');
 
+    // SURVEY ROUTES
+    $router->get('/surveys', 'SurveyController@index');
+    $router->get('/surveys/{id}', 'SurveyController@show');
+    $router->delete('/surveys/{id}', 'SurveyController@destroy');
+    $router->post('/surveys', 'SurveyController@store');
+    $router->put('/surveys/{id}', 'SurveyController@update');
+
+
 });
 

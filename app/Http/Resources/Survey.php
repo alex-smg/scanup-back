@@ -21,9 +21,9 @@ class Survey extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'image' => $this->image,
-            'parent' => $this->when(
+            'brand' => $this->when(
                 null !== $this->brand_id,
-                $this->parent
+                $this->brand
             ),
             'createdAt' => $this->created_at,
             'updatedAt' => $this->updated_at,

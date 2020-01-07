@@ -11,7 +11,7 @@ class Survey extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function parent()
+    public function brand()
     {
         return $this->belongsTo('App\Organization', 'brand_id');
     }

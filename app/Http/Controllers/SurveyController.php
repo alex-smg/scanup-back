@@ -6,8 +6,6 @@ namespace App\Http\Controllers;
 
 use App\Utils\Upload;
 use App\Survey;
-use App\Organization;
-use Illuminate\Validation\Rule;
 use Illuminate\Http\{Request, JsonResponse};
 use Illuminate\Support\Facades\{Response, DB, URL, Validator};
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -44,17 +42,6 @@ class SurveyController extends Controller
     }
 
     /**
-     * @param int $id
-     * @return JsonResponse
-     */
-    public function destroy(int $id): JsonResponse
-    {
-        DB::table('surveys')->where('id', '=', $id)->delete();
-
-        return Response::json([], 204);
-    }
-
-    /**
      * @param Request $request
      * @param int $id
      * @return |\Illuminate\Support\MessageBag
@@ -66,18 +53,11 @@ class SurveyController extends Controller
             'title' => 'required|string|min:1|max:255',
             'image' => 'required|image',
             'description' => 'required|min:1',
-            'brand_id' => 'integer',
+            'brand_id' => 'required|integer',
         ]);
 
         if ($validation->fails())
             return $validation->errors();
-
-        if (null !== $request->input('brand_id')) {
-            $checkStatus = $this->checkBrand($request);
-            if (is_array($checkStatus)) {
-                return Response::json(reset($checkStatus), key($checkStatus));
-            }
-        }
 
         $dataToInsert = $request->only(['title', 'description', 'brand_id']);
         $imageName = $this->upload->storeAsset($request, 'image');
@@ -88,23 +68,24 @@ class SurveyController extends Controller
         return Response::json(Survey::where('id', $id)->get(), 200);
     }
 
+
+
+    /**
+     * @param Request $request
+     * @return JsonResponse|\Illuminate\Support\MessageBag
+     **/
+
     public function store(Request $request)
     {
         $validation = Validator::make($request->all(), [
             'title' => 'required|string|min:1|max:255',
             'image' => 'required|image',
             'description' => 'required|min:1',
-            'brand_id' => 'integer',
+            'brand_id' => 'required|integer',
         ]);
 
         if ($validation->fails())
             return $validation->errors();
-
-        if (null !== $request->input('brand_id')) {
-            $checkStatus = $this->checkBrand($request);
-            if (is_array($checkStatus))
-                return Response::json(reset($checkStatus), key($checkStatus));
-        }
 
         $imageName = $this->upload->storeAsset($request, 'image');
 
@@ -115,15 +96,15 @@ class SurveyController extends Controller
         return Response::json($organization, 201);
     }
 
-    private function checkBrand(Request $request)
+    /**
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function destroy(int $id): JsonResponse
     {
-        $parentOrganization = Organization::find($request->input('brand_id'));
-        if (null === $parentOrganization) {
-            return [400 => 'The brand parent is not found'];
-        }
+        DB::table('surveys')->where('id', '=', $id)->delete();
 
-
-
+        return Response::json([], 204);
     }
 
 }

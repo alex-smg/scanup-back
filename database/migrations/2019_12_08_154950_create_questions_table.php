@@ -18,7 +18,7 @@ class CreateQuestionsTable extends Migration
             $table->longText('title');
             $table->boolean('multi_choice')->default(false);
             $table->integer('survey_id')->unsigned();
-            $table->foreign('survey_id')->references('id')->on('surveys');
+            $table->foreign('survey_id')->references('id')->on('surveys')->onDelete('cascade');;
         });
     }
 

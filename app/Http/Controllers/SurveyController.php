@@ -65,7 +65,7 @@ class SurveyController extends Controller
         $dataToInsert['image'] = $imageName;
         Survey::where('id', $id)->update($dataToInsert);
 
-        return Response::json(Survey::where('id', $id)->get(), 200);
+        return Response::json(Survey::where('id', $id)->first(), 200);
     }
 
 

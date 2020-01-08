@@ -365,7 +365,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "localhost/api/persons",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"persons"
+							]
 						}
 					},
 					"response": []
@@ -403,7 +410,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"first_name\": \"test\",\n\t\"last_name\": \"test\",\n\t\"email\": \"test@test.com\",\n\t\"password\": \"chouf\",\n\t\"organization_id\": 2\n}",
+							"raw": "{\n\t\"first_name\": \"test\",\n\t\"last_name\": \"test\",\n\t\"email\": \"test@test.com\",\n\t\"password\": \"chouf\",\n\t\"organization_id\": 2,\n\t\"role\": \"admin\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -437,7 +444,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"first_name\": \"toto\",\n\t\"last_name\": \"tata\",\n\t\"email\": \"mail@gmail.com\",\n\t\"password\": \"cccccc\",\n\t\"organization_id\": 3\n}",
+							"raw": "{\n\t\"first_name\": \"toto\",\n\t\"last_name\": \"tata\",\n\t\"email\": \"mail@gmail.com\",\n\t\"password\": \"cccccc\",\n\t\"organization_id\": 3,\n\t\"role\": \"moderator\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"

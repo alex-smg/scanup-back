@@ -9,6 +9,7 @@ use Illuminate\Http\{Request, JsonResponse};
 use Illuminate\Support\Facades\{Auth, DB, Hash, Response, Validator};
 use App\Http\Resources\Person as PersonResource;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Validation\Rule;
 
 class PersonController extends Controller
 {
@@ -39,6 +40,7 @@ class PersonController extends Controller
             'first_name' => 'required|string|min:1|max:255',
             'last_name' => 'required|string',
             'email' => 'required|email',
+            'role' => ['required', Rule::in(['super-admin', 'admin', 'moderator', 'viewer'])],
             'password' => 'required|string',
             'organization_id' => 'required'
         ]);
@@ -64,6 +66,7 @@ class PersonController extends Controller
             'first_name' => 'required|string|min:1|max:255',
             'last_name' => 'required',
             'email' => 'required|email|max:255',
+            'role' => ['required', Rule::in(['super-admin', 'admin', 'moderator', 'viewer'])],
             'password' => 'required|string',
             'organization_id' => 'required',
         ]);

@@ -7,7 +7,7 @@ namespace App\Http\Controllers;
 use App\Person;
 use Firebase\JWT\JWT;
 use Illuminate\Http\{Request, JsonResponse};
-use Illuminate\Support\Facades\{Auth, DB, Hash, Response, Validator};
+use Illuminate\Support\Facades\{DB, Hash, Response, Validator};
 use App\Http\Resources\Person as PersonResource;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Validation\Rule;
@@ -135,7 +135,7 @@ class PersonController extends Controller
         $payload = [
             'iss' => "lumen-jwt",
             'sub' => $person->id,
-            'role' => $person->roles ->pluck('name'),
+            'role' => $person->roles,
             'iat' => time(),
             'exp' => time() + 60*60
         ];

@@ -64,7 +64,7 @@ $app->singleton(
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
     'permission' => Spatie\Permission\Middlewares\PermissionMiddleware::class,
-    'role'       => Spatie\Permission\Middlewares\RoleMiddleware::class,
+    'role'       => App\Http\Middleware\RoleMiddleware::class,
     'jwt.auth' => App\Http\Middleware\JwtMiddleware::class,
 ]);
 

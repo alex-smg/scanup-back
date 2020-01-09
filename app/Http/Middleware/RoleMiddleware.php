@@ -5,13 +5,26 @@ namespace App\Http\Middleware;
 use Closure;
 use Exception;
 use App\Person;
-use Firebase\JWT\JWT;
 use Firebase\JWT\ExpiredException;
+use Firebase\JWT\JWT;
+use Spatie\Permission\Exceptions\UnauthorizedException;
 
-class JwtMiddleware
+class RoleMiddleware
 {
-    public function handle($request, Closure $next, $guard = null)
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @param  string   $role
+     * @return mixed
+     */
+    public function handle($request, Closure $next, $role)
     {
+        $roles = is_array($role)
+            ? $role
+            : explode('|', $role);
+
         $token = $request->header('token');
 
         if(!$token) {
@@ -27,7 +40,10 @@ class JwtMiddleware
         }
 
         $person = Person::find($credentials->sub);
-        $request->auth = $person;
+
+        if (!$person->hasAnyRole($roles)) {
+            throw UnauthorizedException::forRoles($roles);
+        }
 
         return $next($request);
     }

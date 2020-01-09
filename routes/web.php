@@ -26,8 +26,11 @@ $router->group(['prefix' => 'api'], function() use($router) {
 
     $router->post('/login', 'PersonController@login');
 
-    $router->group(['middleware' => 'jwt.auth'], function() use ($router) {
+    $router->group(['middleware' => ['jwt.auth', 'role:super-admin|admin']], function() use ($router) {
         $router->get('/organizations', 'OrganizationController@index');
+    });
+
+    $router->group(['middleware' => 'jwt.auth'], function() use ($router) {
         $router->get('/organizations/{id}', 'OrganizationController@show');
         $router->post('/organizations', 'OrganizationController@store');
         $router->put('/organizations/{id}', 'OrganizationController@update');

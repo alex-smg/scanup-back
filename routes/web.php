@@ -17,25 +17,27 @@ $router->get('/', function () use ($router) {
 
 $router->group(['prefix' => 'api'], function() use($router) {
 
-    $router->get('/organizations', 'OrganizationController@index');
-    $router->get('/organizations/{id}', 'OrganizationController@show');
-    $router->post('/organizations', 'OrganizationController@store');
-    $router->put('/organizations/{id}', 'OrganizationController@update');
-    $router->delete('/organizations/{id}', 'OrganizationController@destroy');
-
     $router->get('/surveys', 'SurveyController@index');
     $router->get('/surveys/{id}', 'SurveyController@show');
     $router->delete('/surveys/{id}', 'SurveyController@destroy');
     $router->post('/surveys', 'SurveyController@store');
     $router->put('/surveys/{id}', 'SurveyController@update');
 
-    $router->get('/persons', 'PersonController@index');
-    $router->get('/persons/{id}', 'PersonController@show');
-    $router->post('/persons', 'PersonController@store');
-    $router->put('/persons/{id}', 'PersonController@update');
-    $router->delete('/persons/{id}', 'PersonController@destroy');
 
     $router->post('/login', 'PersonController@login');
 
+    $router->group(['middleware' => 'jwt.auth'], function() use ($router) {
+        $router->get('/organizations', 'OrganizationController@index');
+        $router->get('/organizations/{id}', 'OrganizationController@show');
+        $router->post('/organizations', 'OrganizationController@store');
+        $router->put('/organizations/{id}', 'OrganizationController@update');
+        $router->delete('/organizations/{id}', 'OrganizationController@destroy');
+
+        $router->get('/persons', 'PersonController@index');
+        $router->get('/persons/{id}', 'PersonController@show');
+        $router->post('/persons', 'PersonController@store');
+        $router->put('/persons/{id}', 'PersonController@update');
+        $router->delete('/persons/{id}', 'PersonController@destroy');
+    });
 });
 

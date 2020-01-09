@@ -29,7 +29,6 @@ class AuthServiceProvider extends ServiceProvider
         // should return either a User instance or null. You're free to obtain
         // the User instance via an API token or any other method necessary.
 
-//        $this->registerPolicies();
 
         Gate::before(function ($user, $ability) {
             return $user->hasRole('super-admin') ? true : null;

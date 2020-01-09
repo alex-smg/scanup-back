@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Person;
+use Firebase\JWT\JWT;
 use Illuminate\Http\{Request, JsonResponse};
 use Illuminate\Support\Facades\{Auth, DB, Hash, Response, Validator};
 use App\Http\Resources\Person as PersonResource;
@@ -50,9 +51,11 @@ class PersonController extends Controller
 
         $person = $request->only(['first_name', 'last_name', 'email', 'organization_id']);
         $person['password'] = Hash::make($request->input('password'));
-        Person::create($person);
+        $response = Person::create($person);
 
-        return Response::json($person, 201);
+        $response->assignRole($request->input('role'));
+
+        return Response::json(new PersonResource($response), 201);
     }
 
     /**
@@ -74,12 +77,14 @@ class PersonController extends Controller
         if ($validation->fails())
             return $validation->errors();
 
-        $person = $request->only(['first_name', 'last_name', 'email', 'organization_id', 'password']);
-        $person['password'] = Hash::make($request->input('password'));
+        $payload= $request->only(['first_name', 'last_name', 'email', 'organization_id', 'password']);
+        $payload['password'] = Hash::make($request->input('password'));
 
-        Person::where('id', $id)->update($person);
+        Person::where('id', $id)->update($payload);
+        $person = Person::where('id', $id)->first();
+        $person->assignRole($request->input('role'));
 
-        return Response::json(Person::where('id', $id)->first(), 200);
+        return Response::json(new PersonResource($person), 200);
     }
 
     /**
@@ -107,16 +112,34 @@ class PersonController extends Controller
         if ($validation->fails())
             return $validation->errors();
 
-        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
-            $user = $this->guard()->user();
-            $username = $user->email;
-            $password = $request->input('password');
-            $basicAuth = base64_encode("{$username}:{$password}");
-            $user->token = $basicAuth;
-
-            return $user;
+        $person = Person::where('email', $request->input('email'))->first();
+        if (!$person) {
+            return response()->json(['error' => 'Email does not exist.'], 400);
         }
 
-        return Response::json(['error' => 'Unauthenticated user'], 401);
+        if (Hash::check($request->input('password'), $person->password)) {
+            return response()->json(['token' => $this->jwt($person)], 200);
+        }
+
+        return response()->json(['error' => 'Email or password is wrong.'], 400);
+
+    }
+
+    /**
+     * Create a new token.
+     *
+     * @param  \App\Person $person
+     * @return string
+     */
+    private function jwt(Person $person) {
+        $payload = [
+            'iss' => "lumen-jwt",
+            'sub' => $person->id,
+            'role' => $person->roles ->pluck('name'),
+            'iat' => time(),
+            'exp' => time() + 60*60
+        ];
+
+        return JWT::encode($payload, env('JWT_SECRET'));
     }
 }

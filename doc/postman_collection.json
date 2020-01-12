@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "df03895e-725b-45c8-8030-69ec0b8b0c20",
+		"_postman_id": "7203a8ab-d132-4b10-a1b6-961109b16158",
 		"name": "Scan'up",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -181,7 +181,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "survey",
@@ -433,12 +434,17 @@
 				{
 					"name": "Update a person",
 					"request": {
-						"method": "PUT",
+						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
 								"name": "Content-Type",
 								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "_method",
+								"value": "PUT",
 								"type": "text"
 							}
 						],
@@ -486,11 +492,37 @@
 				},
 				{
 					"name": "Login",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"\",\n\t\"password\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": ""
+							"raw": "localhost/api/login",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"login"
+							]
 						}
 					},
 					"response": []
@@ -498,5 +530,6 @@
 			],
 			"protocolProfileBehavior": {}
 		}
-	]
+	],
+	"protocolProfileBehavior": {}
 }

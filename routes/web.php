@@ -22,8 +22,11 @@ $router->group(['prefix' => 'api'], function() use($router) {
         $router->get('/persons', 'PersonController@index');
         $router->get('/persons/{id}', 'PersonController@show');
 
-        $router->get('/organizations/{id}', 'OrganizationController@show');
+        $router->get('/questions', 'QuestionController@index');
+        $router->get('/questions/{id}', 'QuestionController@show');
+
         $router->get('/organizations', 'OrganizationController@index');
+        $router->get('/organizations/{id}', 'OrganizationController@show');
 
         $router->get('/surveys', 'SurveyController@index');
         $router->get('/surveys/{id}', 'SurveyController@show');
@@ -34,6 +37,10 @@ $router->group(['prefix' => 'api'], function() use($router) {
         $router->post('/persons', 'PersonController@store');
         $router->put('/persons/{id}', 'PersonController@update');
         $router->delete('/persons/{id}', 'PersonController@destroy');
+
+        $router->post('/questions', 'QuestionController@store');
+        $router->put('/questions/{id}', 'QuestionController@update');
+        $router->delete('/questions/{id}', 'QuestionController@destroy');
 
         $router->post('/organizations', 'OrganizationController@store');
         $router->put('/organizations/{id}', 'OrganizationController@update');

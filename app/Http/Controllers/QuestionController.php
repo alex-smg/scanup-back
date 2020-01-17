@@ -52,12 +52,24 @@ class QuestionController extends Controller
     }
 
     /**
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Support\MessageBag
      */
-    public function edit(int $id)
+    public function edit(Request $request, int $id)
     {
-        //
+        $validation = Validator::make($request->all(), [
+            'title' => 'required|string',
+            'multi_choice' => 'boolean',
+            'survey_id' => 'required|number'
+        ]);
+
+        if ($validation->fails())
+            return $validation->errors();
+
+        Question::where('id', $id)->update($request->only(['title', 'multi_choice', 'survey_id']));
+
+        return Response::json(Question::where('id', $id)->first(), 200);
     }
 
     /**

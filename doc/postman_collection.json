@@ -62,7 +62,7 @@
 				{
 					"name": "Update an organization",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -190,7 +190,7 @@
 				{
 					"name": "Update a survey",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -434,7 +434,7 @@
 				{
 					"name": "Update a person",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -492,11 +492,8 @@
 				},
 				{
 					"name": "Login",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -522,6 +519,140 @@
 							"path": [
 								"api",
 								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "question",
+			"item": [
+				{
+					"name": "Get all questions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJsdW1lbi1qd3QiLCJzdWIiOjExLCJyb2xlIjpbXSwiaWF0IjoxNTc5NTU0NTc1LCJleHAiOjE1Nzk1NTgxNzV9.AmebAiCCRqJbIhwnxXlUNvhKSpRI2m2PeD6ReTGGSO4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost/api/questions",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"questions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one question",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJsdW1lbi1qd3QiLCJzdWIiOjExLCJyb2xlIjpbXSwiaWF0IjoxNTc5NTU0NTc1LCJleHAiOjE1Nzk1NTgxNzV9.AmebAiCCRqJbIhwnxXlUNvhKSpRI2m2PeD6ReTGGSO4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost/api/questions/2",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"questions",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new question",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJsdW1lbi1qd3QiLCJzdWIiOjExLCJyb2xlIjpbeyJpZCI6MiwibmFtZSI6ImFkbWluIiwiZ3VhcmRfbmFtZSI6ImFwaSIsImNyZWF0ZWRfYXQiOiIyMDIwLTAxLTIwIDIxOjE2OjMwIiwidXBkYXRlZF9hdCI6IjIwMjAtMDEtMjAgMjE6MTY6MzAiLCJwaXZvdCI6eyJtb2RlbF9pZCI6MTEsInJvbGVfaWQiOjIsIm1vZGVsX3R5cGUiOiJBcHBcXFBlcnNvbiJ9fV0sImlhdCI6MTU3OTU1NTM4OSwiZXhwIjoxNTc5NTU4OTg5fQ.060cEOouccnnylHXmYgZ1XkLPOWLOQnfaNfPhXOQZRY",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Lorem ipsum ?\",\n\t\"survey_id\": 1,\n\t\"multi_choice\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/api/questions",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"questions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a new question",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJsdW1lbi1qd3QiLCJzdWIiOjExLCJyb2xlIjpbeyJpZCI6MiwibmFtZSI6ImFkbWluIiwiZ3VhcmRfbmFtZSI6ImFwaSIsImNyZWF0ZWRfYXQiOiIyMDIwLTAxLTIwIDIxOjE2OjMwIiwidXBkYXRlZF9hdCI6IjIwMjAtMDEtMjAgMjE6MTY6MzAiLCJwaXZvdCI6eyJtb2RlbF9pZCI6MTEsInJvbGVfaWQiOjIsIm1vZGVsX3R5cGUiOiJBcHBcXFBlcnNvbiJ9fV0sImlhdCI6MTU3OTU1NTM4OSwiZXhwIjoxNTc5NTU4OTg5fQ.060cEOouccnnylHXmYgZ1XkLPOWLOQnfaNfPhXOQZRY",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Lorem ipsum ?\",\n\t\"survey_id\": 1,\n\t\"multi_choice\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/api/questions/1",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"questions",
+								"1"
 							]
 						}
 					},

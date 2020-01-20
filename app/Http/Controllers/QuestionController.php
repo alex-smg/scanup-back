@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Validator;
 
 class QuestionController extends Controller
 {
-
     /**
      * @return AnonymousResourceCollection
      */
@@ -40,13 +39,13 @@ class QuestionController extends Controller
         $validation = Validator::make($request->all(), [
             'title' => 'required|string',
             'multi_choice' => 'boolean',
-            'survey_id' => 'required|number'
+            'survey_id' => 'required|integer'
         ]);
 
         if ($validation->fails())
             return $validation->errors();
 
-        $question= Question::create($request->only(['title', 'multi_choice', 'survey_id']));
+        $question = Question::create($request->only(['title', 'multi_choice', 'survey_id']));
 
         return Response::json($question, 201);
     }
@@ -56,12 +55,12 @@ class QuestionController extends Controller
      * @param int $id
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Support\MessageBag
      */
-    public function edit(Request $request, int $id)
+    public function update(Request $request, int $id)
     {
         $validation = Validator::make($request->all(), [
             'title' => 'required|string',
             'multi_choice' => 'boolean',
-            'survey_id' => 'required|number'
+            'survey_id' => 'required|integer'
         ]);
 
         if ($validation->fails())
@@ -70,16 +69,6 @@ class QuestionController extends Controller
         Question::where('id', $id)->update($request->only(['title', 'multi_choice', 'survey_id']));
 
         return Response::json(Question::where('id', $id)->first(), 200);
-    }
-
-    /**
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, int $id)
-    {
-        //
     }
 
     /**

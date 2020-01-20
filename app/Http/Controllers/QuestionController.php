@@ -6,8 +6,10 @@ namespace App\Http\Controllers;
 
 use App\Question;
 use App\Http\Resources\Question as QuestionResource;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 
@@ -32,7 +34,7 @@ class QuestionController extends Controller
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Support\MessageBag
+     * @return JsonResponse|\Illuminate\Support\MessageBag
      */
     public function store(Request $request)
     {
@@ -53,7 +55,7 @@ class QuestionController extends Controller
     /**
      * @param Request $request
      * @param int $id
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Support\MessageBag
+     * @return JsonResponse|\Illuminate\Support\MessageBag
      */
     public function update(Request $request, int $id)
     {
@@ -72,11 +74,13 @@ class QuestionController extends Controller
     }
 
     /**
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return JsonResponse
      */
-    public function destroy(int $id)
+    public function destroy(int $id): JsonResponse
     {
-        //
+        DB::table('questions')->where('id', '=', $id)->delete();
+
+        return Response::json([], 204);
     }
 }

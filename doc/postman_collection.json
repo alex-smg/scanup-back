@@ -18,6 +18,11 @@
 								"name": "Content-Type",
 								"value": "application/x-www-form-urlencoded",
 								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -68,6 +73,11 @@
 								"key": "Content-Type",
 								"name": "Content-Type",
 								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "",
 								"type": "text"
 							}
 						],
@@ -120,7 +130,13 @@
 					"name": "Get all organizations",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "http://localhost/api/organizations?page=2",
 							"protocol": "http",
@@ -145,7 +161,13 @@
 					"name": "Get an organization",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "http://localhost/api/organizations/1",
 							"protocol": "http",
@@ -165,7 +187,13 @@
 					"name": "Delete an organization",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "http://localhost/api/organizations/1",
 							"protocol": "http",
@@ -196,6 +224,11 @@
 								"key": "Content-Type",
 								"name": "Content-Type",
 								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "",
 								"type": "text"
 							}
 						],
@@ -254,6 +287,11 @@
 								"name": "Content-Type",
 								"value": "application/x-www-form-urlencoded",
 								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -299,7 +337,13 @@
 					"name": "Get all surveys",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "http://localhost/api/surveys",
 							"protocol": "http",
@@ -318,9 +362,15 @@
 					"name": "Get a survey",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "http://localhost/api/surveys/11",
+							"raw": "http://localhost/api/surveys/11?",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -329,6 +379,12 @@
 								"api",
 								"surveys",
 								"11"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null
+								}
 							]
 						}
 					},
@@ -338,7 +394,13 @@
 					"name": "Delete survey",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "http://localhost/api/surveys/85",
 							"protocol": "http",
@@ -364,7 +426,13 @@
 					"name": "Get all persons",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "localhost/api/persons",
 							"host": [
@@ -382,7 +450,13 @@
 					"name": "Get single person",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "localhost/api/persons/1",
 							"host": [
@@ -406,6 +480,11 @@
 								"key": "Content-Type",
 								"name": "Content-Type",
 								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "",
 								"type": "text"
 							}
 						],
@@ -446,6 +525,11 @@
 								"key": "_method",
 								"value": "PUT",
 								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -458,7 +542,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost/api/persons/1",
+							"raw": "localhost/api/persons/1?",
 							"host": [
 								"localhost"
 							],
@@ -466,6 +550,12 @@
 								"api",
 								"persons",
 								"1"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null
+								}
 							]
 						}
 					},
@@ -475,7 +565,13 @@
 					"name": "Delete person",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "localhost/api/persons/1",
 							"host": [
@@ -499,6 +595,11 @@
 								"key": "Content-Type",
 								"name": "Content-Type",
 								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "",
 								"type": "text"
 							}
 						],
@@ -537,7 +638,7 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJsdW1lbi1qd3QiLCJzdWIiOjExLCJyb2xlIjpbXSwiaWF0IjoxNTc5NTU0NTc1LCJleHAiOjE1Nzk1NTgxNzV9.AmebAiCCRqJbIhwnxXlUNvhKSpRI2m2PeD6ReTGGSO4",
+								"value": "",
 								"type": "text"
 							}
 						],
@@ -561,7 +662,7 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJsdW1lbi1qd3QiLCJzdWIiOjExLCJyb2xlIjpbXSwiaWF0IjoxNTc5NTU0NTc1LCJleHAiOjE1Nzk1NTgxNzV9.AmebAiCCRqJbIhwnxXlUNvhKSpRI2m2PeD6ReTGGSO4",
+								"value": "",
 								"type": "text"
 							}
 						],
@@ -586,7 +687,7 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJsdW1lbi1qd3QiLCJzdWIiOjExLCJyb2xlIjpbeyJpZCI6MiwibmFtZSI6ImFkbWluIiwiZ3VhcmRfbmFtZSI6ImFwaSIsImNyZWF0ZWRfYXQiOiIyMDIwLTAxLTIwIDIxOjE2OjMwIiwidXBkYXRlZF9hdCI6IjIwMjAtMDEtMjAgMjE6MTY6MzAiLCJwaXZvdCI6eyJtb2RlbF9pZCI6MTEsInJvbGVfaWQiOjIsIm1vZGVsX3R5cGUiOiJBcHBcXFBlcnNvbiJ9fV0sImlhdCI6MTU3OTU1NTM4OSwiZXhwIjoxNTc5NTU4OTg5fQ.060cEOouccnnylHXmYgZ1XkLPOWLOQnfaNfPhXOQZRY",
+								"value": "",
 								"type": "text"
 							},
 							{
@@ -621,11 +722,11 @@
 				{
 					"name": "Update a new question",
 					"request": {
-						"method": "DELETE",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "token",
-								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJsdW1lbi1qd3QiLCJzdWIiOjExLCJyb2xlIjpbeyJpZCI6MiwibmFtZSI6ImFkbWluIiwiZ3VhcmRfbmFtZSI6ImFwaSIsImNyZWF0ZWRfYXQiOiIyMDIwLTAxLTIwIDIxOjE2OjMwIiwidXBkYXRlZF9hdCI6IjIwMjAtMDEtMjAgMjE6MTY6MzAiLCJwaXZvdCI6eyJtb2RlbF9pZCI6MTEsInJvbGVfaWQiOjIsIm1vZGVsX3R5cGUiOiJBcHBcXFBlcnNvbiJ9fV0sImlhdCI6MTU3OTU1NTM4OSwiZXhwIjoxNTc5NTU4OTg5fQ.060cEOouccnnylHXmYgZ1XkLPOWLOQnfaNfPhXOQZRY",
+								"value": "",
 								"type": "text"
 							},
 							{
@@ -633,6 +734,46 @@
 								"name": "Content-Type",
 								"value": "application/json",
 								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Lorem ipsum ?\",\n\t\"survey_id\": 1,\n\t\"multi_choice\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/api/questions/2",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"questions",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete question",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"type": "text",
+								"value": ""
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
 							}
 						],
 						"body": {

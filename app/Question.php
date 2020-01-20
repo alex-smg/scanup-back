@@ -9,4 +9,9 @@ class Question extends Model
     protected $fillable = ['title', 'multi_choice', 'survey_id'];
 
     public $timestamps = false;
+
+    public function survey()
+    {
+        return $this->belongsTo('App\Survey');
+    }
 }

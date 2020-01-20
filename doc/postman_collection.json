@@ -18,6 +18,11 @@
 								"name": "Content-Type",
 								"value": "application/x-www-form-urlencoded",
 								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -62,12 +67,17 @@
 				{
 					"name": "Update an organization",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Content-Type",
 								"name": "Content-Type",
 								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "",
 								"type": "text"
 							}
 						],
@@ -120,7 +130,13 @@
 					"name": "Get all organizations",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "http://localhost/api/organizations?page=2",
 							"protocol": "http",
@@ -145,7 +161,13 @@
 					"name": "Get an organization",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "http://localhost/api/organizations/1",
 							"protocol": "http",
@@ -165,7 +187,13 @@
 					"name": "Delete an organization",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "http://localhost/api/organizations/1",
 							"protocol": "http",
@@ -190,12 +218,17 @@
 				{
 					"name": "Update a survey",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Content-Type",
 								"name": "Content-Type",
 								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "",
 								"type": "text"
 							}
 						],
@@ -254,6 +287,11 @@
 								"name": "Content-Type",
 								"value": "application/x-www-form-urlencoded",
 								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -299,7 +337,13 @@
 					"name": "Get all surveys",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "http://localhost/api/surveys",
 							"protocol": "http",
@@ -318,9 +362,15 @@
 					"name": "Get a survey",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "http://localhost/api/surveys/11",
+							"raw": "http://localhost/api/surveys/11?",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -329,6 +379,12 @@
 								"api",
 								"surveys",
 								"11"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null
+								}
 							]
 						}
 					},
@@ -338,7 +394,13 @@
 					"name": "Delete survey",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "http://localhost/api/surveys/85",
 							"protocol": "http",
@@ -364,7 +426,13 @@
 					"name": "Get all persons",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "localhost/api/persons",
 							"host": [
@@ -382,7 +450,13 @@
 					"name": "Get single person",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "localhost/api/persons/1",
 							"host": [
@@ -406,6 +480,11 @@
 								"key": "Content-Type",
 								"name": "Content-Type",
 								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "",
 								"type": "text"
 							}
 						],
@@ -434,7 +513,7 @@
 				{
 					"name": "Update a person",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -445,6 +524,11 @@
 							{
 								"key": "_method",
 								"value": "PUT",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "",
 								"type": "text"
 							}
 						],
@@ -458,7 +542,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost/api/persons/1",
+							"raw": "localhost/api/persons/1?",
 							"host": [
 								"localhost"
 							],
@@ -466,6 +550,12 @@
 								"api",
 								"persons",
 								"1"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null
+								}
 							]
 						}
 					},
@@ -475,7 +565,13 @@
 					"name": "Delete person",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "localhost/api/persons/1",
 							"host": [
@@ -492,16 +588,18 @@
 				},
 				{
 					"name": "Login",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
 								"name": "Content-Type",
 								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "token",
+								"value": "",
 								"type": "text"
 							}
 						],
@@ -522,6 +620,180 @@
 							"path": [
 								"api",
 								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "question",
+			"item": [
+				{
+					"name": "Get all questions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost/api/questions",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"questions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one question",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost/api/questions/2",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"questions",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new question",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Lorem ipsum ?\",\n\t\"survey_id\": 1,\n\t\"multi_choice\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/api/questions",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"questions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a new question",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Lorem ipsum ?\",\n\t\"survey_id\": 1,\n\t\"multi_choice\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/api/questions/2",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"questions",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete question",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"type": "text",
+								"value": ""
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Lorem ipsum ?\",\n\t\"survey_id\": 1,\n\t\"multi_choice\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/api/questions/1",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"questions",
+								"1"
 							]
 						}
 					},

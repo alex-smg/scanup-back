@@ -9,6 +9,7 @@ use Illuminate\Http\{Request, JsonResponse};
 use Illuminate\Support\Facades\{DB, URL, Validator, Response};
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use App\Http\Resources\Response as ResponseResource;
+use Illuminate\Validation\Rule;
 
 class ResponseController extends Controller
 {
@@ -39,7 +40,7 @@ class ResponseController extends Controller
     public function store(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            'text' => 'required|string|min:1',
+            'text' => 'required|string|min:1|max:255',
             'question_id' => 'integer',
         ]);
 
@@ -61,12 +62,11 @@ class ResponseController extends Controller
     public function update(Request $request, int $id)
     {
         $validation = Validator::make($request->all(), [
-            'text' => 'string|min:1',
+            'text' => 'required|string|min:1|max:255',
             'question_id' => 'integer',
         ]);
-
         if ($validation->fails())
-            return $validation->errors();
+           return $validation->errors();
 
         $dataToInsert = $request->only(['text', 'question_id']);
         ResponseQuestion::where('id', $id)->update($dataToInsert);

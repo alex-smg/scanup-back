@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Response as ResponseQuestion;
+use App\Response as ResponseModel;
 use Illuminate\Http\{Request, JsonResponse};
 use Illuminate\Support\Facades\{DB, URL, Validator, Response};
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -13,14 +13,12 @@ use Illuminate\Validation\Rule;
 
 class ResponseController extends Controller
 {
-
-
     /**
      * @return AnonymousResourceCollection
      */
     public function index(): AnonymousResourceCollection
     {
-        return ResponseResource::collection(ResponseQuestion::paginate(10));
+        return ResponseResource::collection(ResponseModel::paginate(10));
     }
 
     /**
@@ -29,7 +27,7 @@ class ResponseController extends Controller
      */
     public function show(int $id): ResponseResource
     {
-        return new ResponseResource(ResponseQuestion::find($id));
+        return new ResponseResource(ResponseModel::find($id));
     }
 
     /**
@@ -41,7 +39,7 @@ class ResponseController extends Controller
     {
         $validation = Validator::make($request->all(), [
             'text' => 'required|string|min:1|max:255',
-            'question_id' => 'integer',
+            'question_id' => 'integer|required',
         ]);
 
         if ($validation->fails())
@@ -49,7 +47,7 @@ class ResponseController extends Controller
 
 
         $dataToInsert = $request->only(['text', 'question_id']);
-        $response = ResponseQuestion::create($dataToInsert);
+        $response = ResponseModel::create($dataToInsert);
 
         return Response::json($response, 201);
     }
@@ -63,15 +61,15 @@ class ResponseController extends Controller
     {
         $validation = Validator::make($request->all(), [
             'text' => 'required|string|min:1|max:255',
-            'question_id' => 'integer',
+            'question_id' => 'integer|required',
         ]);
         if ($validation->fails())
            return $validation->errors();
 
         $dataToInsert = $request->only(['text', 'question_id']);
-        ResponseQuestion::where('id', $id)->update($dataToInsert);
+        ResponseModel::where('id', $id)->update($dataToInsert);
 
-        return Response::json(ResponseQuestion::where('id', $id)->first(), 200);
+        return Response::json(ResponseModel::where('id', $id)->first(), 200);
     }
 
 

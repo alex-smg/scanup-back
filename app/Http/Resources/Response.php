@@ -18,7 +18,7 @@ class Response extends Resource
             'id' => $this->id,
             'text' => $this->text,
             'question' => $this->when(
-                null !== $this->question_id,
+                $this->question_id,
                 $this->question
             ),
         ];

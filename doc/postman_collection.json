@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "7203a8ab-d132-4b10-a1b6-961109b16158",
+		"_postman_id": "88628a86-db2f-420e-9990-484fd5335b55",
 		"name": "Scan'up",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -794,6 +794,166 @@
 								"api",
 								"questions",
 								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "response",
+			"item": [
+				{
+					"name": "get all response",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/api/responses",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"responses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get response by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost/api/responses/4",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"responses",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add new response",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "text",
+									"value": "test",
+									"type": "text"
+								},
+								{
+									"key": "question_id",
+									"value": "3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost/api/responses",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"responses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete response",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost/api/responses/2",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"responses",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update response",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "text",
+									"value": "update",
+									"type": "text"
+								},
+								{
+									"key": "question_id",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "_method",
+									"value": "PUT",
+									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/api/responses/11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"responses",
+								"11"
 							]
 						}
 					},

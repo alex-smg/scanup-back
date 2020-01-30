@@ -30,6 +30,9 @@ $router->group(['prefix' => 'api'], function() use($router) {
 
         $router->get('/surveys', 'SurveyController@index');
         $router->get('/surveys/{id}', 'SurveyController@show');
+
+        $router->get('/responses', 'ResponseController@index');
+        $router->get('/responses/{id}', 'ResponseController@show');
     });
 
 
@@ -49,6 +52,10 @@ $router->group(['prefix' => 'api'], function() use($router) {
         $router->delete('/surveys/{id}', 'SurveyController@destroy');
         $router->post('/surveys', 'SurveyController@store');
         $router->put('/surveys/{id}', 'SurveyController@update');
+
+        $router->post('/responses', 'ResponseController@store');
+        $router->put('/responses/{id}', 'ResponseController@update');
+        $router->delete('/responses/{id}', 'ResponseController@destroy');
     });
 });
 

@@ -18,6 +18,7 @@ class CreateSurveysTable extends Migration
             $table->string('image');
             $table->string('title');
             $table->longText('description');
+            $table->enum('status', ['draft', 'disable', 'in progress']);
             $table->integer('brand_id');
             $table->foreign('brand_id')->references('id')->on('organizations');
             $table->timestamps();

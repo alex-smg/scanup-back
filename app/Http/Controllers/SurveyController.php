@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Utils\Upload;
 use App\Survey;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\{Request, JsonResponse};
 use Illuminate\Support\Facades\{Response, DB, URL, Validator};
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -53,13 +54,14 @@ class SurveyController extends Controller
             'title' => 'required|string|min:1|max:255',
             'image' => 'required|image',
             'description' => 'required|min:1',
+            'status' => ['required', Rule::in(['draft', 'disable', 'in progress'])],
             'brand_id' => 'required|integer',
         ]);
 
         if ($validation->fails())
             return $validation->errors();
 
-        $dataToInsert = $request->only(['title', 'description', 'brand_id']);
+        $dataToInsert = $request->only(['title', 'description', 'brand_id', 'status']);
         $imageName = $this->upload->storeAsset($request, 'image');
 
         $dataToInsert['image'] = $imageName;
@@ -81,6 +83,7 @@ class SurveyController extends Controller
             'title' => 'required|string|min:1|max:255',
             'image' => 'required|image',
             'description' => 'required|min:1',
+            'status' => ['required', Rule::in(['draft', 'disable', 'in progress'])],
             'brand_id' => 'required|integer',
         ]);
 
@@ -89,7 +92,7 @@ class SurveyController extends Controller
 
         $imageName = $this->upload->storeAsset($request, 'image');
 
-        $dataToInsert = $request->only(['title', 'description', 'brand_id']);
+        $dataToInsert = $request->only(['title', 'description', 'brand_id', 'status']);
         $dataToInsert['image'] = $imageName;
         $organization = Survey::create($dataToInsert);
 

@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Question;
 use App\Http\Resources\Question as QuestionResource;
+use App\Utils\Upload;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -15,6 +16,17 @@ use Illuminate\Support\Facades\Validator;
 
 class QuestionController extends Controller
 {
+
+    /**
+     * @var Upload
+     */
+    protected $upload;
+
+    public function __construct(Upload $upload)
+    {
+        $this->upload = $upload;
+    }
+
     /**
      * @return AnonymousResourceCollection
      */
@@ -41,13 +53,21 @@ class QuestionController extends Controller
         $validation = Validator::make($request->all(), [
             'title' => 'required|string',
             'multi_choice' => 'boolean',
+            'image' => 'image',
             'survey_id' => 'required|integer'
         ]);
+
+        $data = $request->only(['title', 'multi_choice', 'survey_id']);
+
+        if (null !== $request->file('image')) {
+            $imageName = $this->upload->storeAsset($request, 'image');
+            $data['image'] = $imageName;
+        }
 
         if ($validation->fails())
             return $validation->errors();
 
-        $question = Question::create($request->only(['title', 'multi_choice', 'survey_id']));
+        $question = Question::create($data);
 
         return Response::json($question, 201);
     }
@@ -62,13 +82,21 @@ class QuestionController extends Controller
         $validation = Validator::make($request->all(), [
             'title' => 'required|string',
             'multi_choice' => 'boolean',
+            'image' => 'image',
             'survey_id' => 'required|integer'
         ]);
+
+        $data = $request->only(['title', 'multi_choice', 'survey_id']);
+
+        if (null !== $request->file('image')) {
+            $imageName = $this->upload->storeAsset($request, 'image');
+            $data['image'] = $imageName;
+        }
 
         if ($validation->fails())
             return $validation->errors();
 
-        Question::where('id', $id)->update($request->only(['title', 'multi_choice', 'survey_id']));
+        Question::where('id', $id)->update($data);
 
         return Response::json(Question::where('id', $id)->first(), 200);
     }

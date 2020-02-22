@@ -16,7 +16,7 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->longText('title');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->boolean('multi_choice')->default(false);
             $table->integer('survey_id')->unsigned();
             $table->foreign('survey_id')->references('id')->on('surveys')->onDelete('cascade');

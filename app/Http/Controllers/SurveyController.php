@@ -52,7 +52,6 @@ class SurveyController extends Controller
     {
         $validation = Validator::make($request->all(), [
             'title' => 'required|string|min:1|max:255',
-            'image' => 'required|image',
             'description' => 'required|min:1',
             'status' => ['required', Rule::in(['draft', 'disable', 'in progress'])],
             'brand_id' => 'required|integer',
@@ -81,7 +80,6 @@ class SurveyController extends Controller
     {
         $validation = Validator::make($request->all(), [
             'title' => 'required|string|min:1|max:255',
-            'image' => 'required|image',
             'description' => 'required|min:1',
             'status' => ['required', Rule::in(['draft', 'disable', 'in progress'])],
             'brand_id' => 'required|integer',

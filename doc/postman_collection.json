@@ -228,44 +228,13 @@
 							},
 							{
 								"key": "token",
-								"value": "",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJsdW1lbi1qd3QiLCJzdWIiOjExLCJyb2xlIjpbeyJpZCI6MiwibmFtZSI6ImFkbWluIiwiZ3VhcmRfbmFtZSI6ImFwaSIsImNyZWF0ZWRfYXQiOiIyMDIwLTAyLTIyIDE1OjQzOjI4IiwidXBkYXRlZF9hdCI6IjIwMjAtMDItMjIgMTU6NDM6MjgiLCJwaXZvdCI6eyJtb2RlbF9pZCI6MTEsInJvbGVfaWQiOjIsIm1vZGVsX3R5cGUiOiJBcHBcXFBlcnNvbiJ9fV0sImlhdCI6MTU4MjM4NjIyNSwiZXhwIjoxNTgyMzg5ODI1fQ.vQ562uKBpdXm1zMCFK6_KlDHRFM8E31hqNYbF96ulPk",
 								"type": "text"
 							}
 						],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "title",
-									"value": "testUpdate",
-									"type": "text"
-								},
-								{
-									"key": "image",
-									"type": "file",
-									"src": "/Users/alexandresmagghe/Documents/box.png"
-								},
-								{
-									"key": "brand_id",
-									"value": "13",
-									"type": "text"
-								},
-								{
-									"key": "description",
-									"value": "test",
-									"type": "text"
-								},
-								{
-									"key": "_method",
-									"value": "PUT",
-									"type": "text"
-								},
-								{
-									"key": "status",
-									"value": "disable",
-									"type": "text"
-								}
-							]
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Survey title\",\n\t\"description\": \"Lorem ipsum\",\n\t\"is_mystery_brand\": false,\n\t\"started_at\": \"2019-12-12 12:12:12\",\n\t\"ended_at\": \"2019-12-12 12:12:12\",\n\t\"status\" : \"disable\",\n\t\"brand_id\": 11\n}"
 						},
 						"url": {
 							"raw": "http://localhost/api/surveys/11",
@@ -290,44 +259,23 @@
 							{
 								"key": "Content-Type",
 								"name": "Content-Type",
-								"value": "application/x-www-form-urlencoded",
+								"value": "application/json",
 								"type": "text"
 							},
 							{
 								"key": "token",
-								"value": "",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJsdW1lbi1qd3QiLCJzdWIiOjExLCJyb2xlIjpbeyJpZCI6MiwibmFtZSI6ImFkbWluIiwiZ3VhcmRfbmFtZSI6ImFwaSIsImNyZWF0ZWRfYXQiOiIyMDIwLTAyLTIyIDE1OjQzOjI4IiwidXBkYXRlZF9hdCI6IjIwMjAtMDItMjIgMTU6NDM6MjgiLCJwaXZvdCI6eyJtb2RlbF9pZCI6MTEsInJvbGVfaWQiOjIsIm1vZGVsX3R5cGUiOiJBcHBcXFBlcnNvbiJ9fV0sImlhdCI6MTU4MjM4NjIyNSwiZXhwIjoxNTgyMzg5ODI1fQ.vQ562uKBpdXm1zMCFK6_KlDHRFM8E31hqNYbF96ulPk",
 								"type": "text"
 							}
 						],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "title",
-									"value": "testPost",
-									"type": "text"
-								},
-								{
-									"key": "image",
-									"type": "file",
-									"src": "/Users/alexandresmagghe/Documents/logo.png"
-								},
-								{
-									"key": "brand_id",
-									"value": "11",
-									"type": "text"
-								},
-								{
-									"key": "description",
-									"value": "fake description",
-									"type": "text"
-								},
-								{
-									"key": "status",
-									"value": "disable",
-									"type": "text"
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Survey title\",\n\t\"description\": \"Lorem ipsum\",\n\t\"is_mystery_brand\": false,\n\t\"started_at\": \"2019-12-12 12:12:12\",\n\t\"ended_at\": \"2019-12-12 12:12:12\",\n\t\"status\" : \"disable\",\n\t\"brand_id\": 11\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
-							]
+							}
 						},
 						"url": {
 							"raw": "http://localhost/api/surveys",
@@ -615,7 +563,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\": \"\",\n\t\"password\": \"\"\n}",
+							"raw": "{\n\t\"email\": \"test@test.com\",\n\t\"password\": \"chouf\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -697,19 +645,35 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJsdW1lbi1qd3QiLCJzdWIiOjExLCJyb2xlIjpbeyJpZCI6MiwibmFtZSI6ImFkbWluIiwiZ3VhcmRfbmFtZSI6ImFwaSIsImNyZWF0ZWRfYXQiOiIyMDIwLTAyLTIyIDE1OjQzOjI4IiwidXBkYXRlZF9hdCI6IjIwMjAtMDItMjIgMTU6NDM6MjgiLCJwaXZvdCI6eyJtb2RlbF9pZCI6MTEsInJvbGVfaWQiOjIsIm1vZGVsX3R5cGUiOiJBcHBcXFBlcnNvbiJ9fV0sImlhdCI6MTU4MjM4NjIyNSwiZXhwIjoxNTgyMzg5ODI1fQ.vQ562uKBpdXm1zMCFK6_KlDHRFM8E31hqNYbF96ulPk",
 								"type": "text"
 							},
 							{
 								"key": "Content-Type",
 								"name": "Content-Type",
-								"value": "application/json",
+								"value": "application/x-www-form-urlencoded",
 								"type": "text"
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"title\": \"Lorem ipsum ?\",\n\t\"survey_id\": 1,\n\t\"multi_choice\": true\n}",
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Lorem ipsum ?",
+									"type": "text"
+								},
+								{
+									"key": "survey_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/home/jrbour/Downloads/Screenshot_2020-02-13 Sodexo - Benefits Platform(1).png"
+								}
+							],
 							"options": {
 								"raw": {
 									"language": "json"
@@ -736,7 +700,7 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJsdW1lbi1qd3QiLCJzdWIiOjExLCJyb2xlIjpbeyJpZCI6MiwibmFtZSI6ImFkbWluIiwiZ3VhcmRfbmFtZSI6ImFwaSIsImNyZWF0ZWRfYXQiOiIyMDIwLTAyLTIyIDE1OjQzOjI4IiwidXBkYXRlZF9hdCI6IjIwMjAtMDItMjIgMTU6NDM6MjgiLCJwaXZvdCI6eyJtb2RlbF9pZCI6MTEsInJvbGVfaWQiOjIsIm1vZGVsX3R5cGUiOiJBcHBcXFBlcnNvbiJ9fV0sImlhdCI6MTU4MjM4NjIyNSwiZXhwIjoxNTgyMzg5ODI1fQ.vQ562uKBpdXm1zMCFK6_KlDHRFM8E31hqNYbF96ulPk",
 								"type": "text"
 							},
 							{

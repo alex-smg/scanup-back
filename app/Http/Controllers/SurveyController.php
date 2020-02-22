@@ -44,6 +44,32 @@ class SurveyController extends Controller
 
     /**
      * @param Request $request
+     * @return JsonResponse|\Illuminate\Support\MessageBag
+     **/
+
+    public function store(Request $request)
+    {
+        $validation = Validator::make($request->all(), [
+            'title' => 'required|string|min:1|max:255',
+            'description' => 'required|min:1',
+            'is_mystery_brand' => 'bool',
+            'started_at' => 'date_format:Y-m-d H:i:s',
+            'ended_at' => 'date_format:Y-m-d H:i:s',
+            'status' => ['required', Rule::in(['draft', 'disable', 'in progress'])],
+            'brand_id' => 'required|integer',
+        ]);
+
+        if ($validation->fails())
+            return $validation->errors();
+
+        $dataToInsert = $request->only(['title', 'description', 'brand_id', 'status', 'started_at', 'ended_at', 'is_mystery_brand']);
+        $organization = Survey::create($dataToInsert);
+
+        return Response::json($organization, 201);
+    }
+
+    /**
+     * @param Request $request
      * @param int $id
      * @return |\Illuminate\Support\MessageBag
      * @throws \Exception
@@ -53,6 +79,9 @@ class SurveyController extends Controller
         $validation = Validator::make($request->all(), [
             'title' => 'required|string|min:1|max:255',
             'description' => 'required|min:1',
+            'is_mystery_brand' => 'bool',
+            'started_at' => 'date_format:Y-m-d H:i:s',
+            'ended_at' => 'date_format:Y-m-d H:i:s',
             'status' => ['required', Rule::in(['draft', 'disable', 'in progress'])],
             'brand_id' => 'required|integer',
         ]);
@@ -60,42 +89,12 @@ class SurveyController extends Controller
         if ($validation->fails())
             return $validation->errors();
 
-        $dataToInsert = $request->only(['title', 'description', 'brand_id', 'status']);
-        $imageName = $this->upload->storeAsset($request, 'image');
-
-        $dataToInsert['image'] = $imageName;
+        $dataToInsert = $request->only(['title', 'description', 'brand_id', 'status', 'started_at', 'ended_at', 'is_mystery_brand']);
         Survey::where('id', $id)->update($dataToInsert);
 
         return Response::json(Survey::where('id', $id)->first(), 200);
     }
 
-
-
-    /**
-     * @param Request $request
-     * @return JsonResponse|\Illuminate\Support\MessageBag
-     **/
-
-    public function store(Request $request)
-    {
-        $validation = Validator::make($request->all(), [
-            'title' => 'required|string|min:1|max:255',
-            'description' => 'required|min:1',
-            'status' => ['required', Rule::in(['draft', 'disable', 'in progress'])],
-            'brand_id' => 'required|integer',
-        ]);
-
-        if ($validation->fails())
-            return $validation->errors();
-
-        $imageName = $this->upload->storeAsset($request, 'image');
-
-        $dataToInsert = $request->only(['title', 'description', 'brand_id', 'status']);
-        $dataToInsert['image'] = $imageName;
-        $organization = Survey::create($dataToInsert);
-
-        return Response::json($organization, 201);
-    }
 
     /**
      * @param int $id

@@ -43,6 +43,16 @@ class SurveyController extends Controller
     }
 
     /**
+     * SEARCH BY TITLE OF SURVEY
+     * @param string $value
+     * @return SurveyResource
+     */
+    public function search(string $value)
+    {
+        return Survey::where('title', 'like', '%'.$value.'%')->get();
+    }
+
+    /**
      * @param Request $request
      * @param int $id
      * @return |\Illuminate\Support\MessageBag

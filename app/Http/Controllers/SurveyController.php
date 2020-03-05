@@ -30,7 +30,7 @@ class SurveyController extends Controller
      */
     public function index(): AnonymousResourceCollection
     {
-        return SurveyResource::collection(Survey::paginate(10));
+        return SurveyResource::collection(Survey::paginate(5));
     }
 
     /**
@@ -49,7 +49,7 @@ class SurveyController extends Controller
      */
     public function search(string $value)
     {
-        return Survey::where('title', 'like', '%'.$value.'%')->get();
+        return Survey::where('title', 'ilike', '%'.$value.'%')->get();
     }
 
     /**

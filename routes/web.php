@@ -58,7 +58,5 @@ $router->group(['prefix' => 'api'], function() use($router) {
         $router->put('/responses/{id}', 'ResponseController@update');
         $router->delete('/responses/{id}', 'ResponseController@destroy');
     });
-
-
 });
 

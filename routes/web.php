@@ -30,6 +30,7 @@ $router->group(['prefix' => 'api'], function() use($router) {
 
         $router->get('/surveys', 'SurveyController@index');
         $router->get('/surveys/{id}', 'SurveyController@show');
+        $router->get('/surveys/search/{value}', 'SurveyController@search');
 
         $router->get('/responses', 'ResponseController@index');
         $router->get('/responses/{id}', 'ResponseController@show');

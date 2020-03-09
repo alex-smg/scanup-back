@@ -17,7 +17,7 @@ class CreateResponsesTable extends Migration
             $table->bigIncrements('id');
             $table->string('text');
             $table->integer('question_id')->unsigned();
-            $table->foreign('question_id')->references('id')->on('questions');
+            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
         });
     }
 

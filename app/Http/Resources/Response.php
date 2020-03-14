@@ -21,6 +21,10 @@ class Response extends Resource
                 $this->question_id,
                 $this->question
             ),
+            'linkQuestion' => $this->when(
+                $this->link_question,
+                $this->linkQuestion
+            ),
         ];
     }
 }

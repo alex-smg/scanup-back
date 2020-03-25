@@ -40,7 +40,7 @@ class ResponseController extends Controller
         $validation = Validator::make($request->all(), [
             'text' => 'required|string|min:1|max:255',
             'question_id' => 'integer|required',
-            'link_question' => 'integer'
+            'link_question' => 'nullable|integer'
         ]);
 
         if ($validation->fails())
@@ -63,7 +63,7 @@ class ResponseController extends Controller
         $validation = Validator::make($request->all(), [
             'text' => 'required|string|min:1|max:255',
             'question_id' => 'integer|required',
-            'link_question' => 'integer'
+            'link_question' => 'nullable|integer'
         ]);
 
         if ($validation->fails())

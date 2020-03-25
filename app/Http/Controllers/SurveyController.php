@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Person;
 use App\Utils\Upload;
 use App\Survey;
+use Firebase\JWT\JWT;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\{Request, JsonResponse};
 use Illuminate\Support\Facades\{Response, DB, URL, Validator};
@@ -26,11 +28,17 @@ class SurveyController extends Controller
     }
 
     /**
+     * @param Request $request
      * @return AnonymousResourceCollection
      */
-    public function index(): AnonymousResourceCollection
+    public function index(Request $request): AnonymousResourceCollection
     {
-        return SurveyResource::collection(Survey::paginate(5));
+        $token = $request->header('token');
+        $credentials = JWT::decode($token, env('JWT_SECRET'), ['HS256']);
+
+        $person = Person::find($credentials->sub);
+
+        return SurveyResource::collection(Survey::where('brand_id', '=', $person->organization_id)->paginate(5));
     }
 
     /**
@@ -60,8 +68,8 @@ class SurveyController extends Controller
     public function store(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            'title' => 'required|string|min:1|max:255',
-            'description' => 'required|min:1',
+            'title' => 'required|string|min:10|max:255',
+            'description' => 'required|min:10',
             'is_mystery_brand' => 'bool',
             'started_at' => 'date_format:Y-m-d H:i:s',
             'ended_at' => 'date_format:Y-m-d H:i:s',

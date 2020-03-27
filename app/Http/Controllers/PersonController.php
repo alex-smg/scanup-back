@@ -38,7 +38,7 @@ class PersonController extends Controller
      */
     public function search(string $value)
     {
-        return Person::where('firstName', 'ilike', '%'.$value.'%')->orwhere('lastName', 'ilike', '%'.$value.'%')->get();
+        return Person::where('first_name', 'ilike', '%'.$value.'%')->orwhere('last_name', 'ilike', '%'.$value.'%')->get();
     }
 
     /**

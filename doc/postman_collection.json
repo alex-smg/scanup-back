@@ -804,7 +804,13 @@
 					},
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJsdW1lbi1qd3QiLCJzdWIiOjExLCJyb2xlIjpbeyJpZCI6MiwibmFtZSI6ImFkbWluIiwiZ3VhcmRfbmFtZSI6ImFwaSIsImNyZWF0ZWRfYXQiOiIyMDIwLTAzLTEzIDE3OjU0OjQ2IiwidXBkYXRlZF9hdCI6IjIwMjAtMDMtMTMgMTc6NTQ6NDYiLCJwaXZvdCI6eyJtb2RlbF9pZCI6MTEsInJvbGVfaWQiOjIsIm1vZGVsX3R5cGUiOiJBcHBcXFBlcnNvbiJ9fV0sImlhdCI6MTU4NDE5OTQ1MiwiZXhwIjoxNTg0MjAzMDUyfQ.t9sJM7h9okHnIyO6hIfc6JFHL4wvHv4mL64hTgX-lz4",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "formdata",
 							"formdata": [
@@ -816,14 +822,14 @@
 							]
 						},
 						"url": {
-							"raw": "localhost/api/responses/4",
+							"raw": "localhost/api/responses/51",
 							"host": [
 								"localhost"
 							],
 							"path": [
 								"api",
 								"responses",
-								"4"
+								"51"
 							]
 						}
 					},
@@ -833,7 +839,13 @@
 					"name": "add new response",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJsdW1lbi1qd3QiLCJzdWIiOjExLCJyb2xlIjpbeyJpZCI6MiwibmFtZSI6ImFkbWluIiwiZ3VhcmRfbmFtZSI6ImFwaSIsImNyZWF0ZWRfYXQiOiIyMDIwLTAzLTEzIDE3OjU0OjQ2IiwidXBkYXRlZF9hdCI6IjIwMjAtMDMtMTMgMTc6NTQ6NDYiLCJwaXZvdCI6eyJtb2RlbF9pZCI6MTEsInJvbGVfaWQiOjIsIm1vZGVsX3R5cGUiOiJBcHBcXFBlcnNvbiJ9fV0sImlhdCI6MTU4NDE5OTQ1MiwiZXhwIjoxNTg0MjAzMDUyfQ.t9sJM7h9okHnIyO6hIfc6JFHL4wvHv4mL64hTgX-lz4",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "formdata",
 							"formdata": [
@@ -845,6 +857,11 @@
 								{
 									"key": "question_id",
 									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "link_question",
+									"value": "4",
 									"type": "text"
 								}
 							]

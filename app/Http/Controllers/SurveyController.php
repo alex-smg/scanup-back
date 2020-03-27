@@ -49,7 +49,7 @@ class SurveyController extends Controller
      */
     public function search(string $value)
     {
-        return Survey::where('title', 'ilike', '%'.$value.'%')->get();
+        return Survey::where('title', 'ilike', '%'.$value.'%')->paginate(5);
     }
 
     /**

@@ -48,7 +48,7 @@ class OrganizationController extends Controller
      */
     public function search(string $value)
     {
-        return Organization::where('name', 'ilike', '%'.$value.'%')->paginate(5);
+        return Organization::where('name', 'like', '%'.$value.'%')->paginate(5);
     }
 
     /**

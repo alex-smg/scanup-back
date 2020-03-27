@@ -19,7 +19,7 @@ class PersonController extends Controller
      */
     public function index(): AnonymousResourceCollection
     {
-        return PersonResource::collection(Person::paginate(10));
+        return PersonResource::collection(Person::paginate(5));
     }
 
     /**
@@ -29,6 +29,16 @@ class PersonController extends Controller
     public function show(int $id): PersonResource
     {
         return new PersonResource(Person::find($id));
+    }
+
+    /**
+     * SEARCH BY FIRSTNAME AND LASTNAME OF PERSON
+     * @param string $value
+     * @return PersonResource
+     */
+    public function search(string $value)
+    {
+        return Person::where('firstName', 'ilike', '%'.$value.'%')->orwhere('lastName', 'ilike', '%'.$value.'%')->get();
     }
 
     /**

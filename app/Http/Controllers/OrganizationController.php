@@ -29,7 +29,7 @@ class OrganizationController extends Controller
      */
     public function index(): AnonymousResourceCollection
     {
-        return OrganizationResource::collection(Organization::paginate(10));
+        return OrganizationResource::collection(Organization::paginate(5));
     }
 
     /**
@@ -39,6 +39,16 @@ class OrganizationController extends Controller
     public function show(int $id): OrganizationResource
     {
         return new OrganizationResource(Organization::find($id));
+    }
+
+    /**
+     * SEARCH BY NAME OF ORGANIZATION
+     * @param string $value
+     * @return OrganizationResource
+     */
+    public function search(string $value)
+    {
+        return Organization::where('title', 'ilike', '%'.$value.'%')->get();
     }
 
     /**

@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Person;
 use App\Utils\Upload;
 use App\Survey;
+use Firebase\JWT\JWT;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\{Request, JsonResponse};
 use Illuminate\Support\Facades\{Response, DB, URL, Validator};
@@ -26,11 +28,17 @@ class SurveyController extends Controller
     }
 
     /**
+     * @param Request $request
      * @return AnonymousResourceCollection
      */
-    public function index(): AnonymousResourceCollection
+    public function index(Request $request): AnonymousResourceCollection
     {
-        return SurveyResource::collection(Survey::paginate(5));
+        $token = $request->header('token');
+        $credentials = JWT::decode($token, env('JWT_SECRET'), ['HS256']);
+
+        $person = Person::find($credentials->sub);
+
+        return SurveyResource::collection(Survey::where('brand_id', '=', $person->organization_id)->paginate(5));
     }
 
     /**
@@ -49,7 +57,33 @@ class SurveyController extends Controller
      */
     public function search(string $value)
     {
-        return Survey::where('title', 'ilike', '%'.$value.'%')->paginate(5);
+        return Survey::where('title', 'like', '%'.$value.'%')->paginate(5);
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse|\Illuminate\Support\MessageBag
+     **/
+
+    public function store(Request $request)
+    {
+        $validation = Validator::make($request->all(), [
+            'title' => 'required|string|min:10|max:255',
+            'description' => 'required|min:10',
+            'is_mystery_brand' => 'bool',
+            'started_at' => 'date_format:Y-m-d H:i:s',
+            'ended_at' => 'date_format:Y-m-d H:i:s',
+            'status' => ['required', Rule::in(['draft', 'disable', 'in progress'])],
+            'brand_id' => 'required|integer',
+        ]);
+
+        if ($validation->fails())
+            return $validation->errors();
+
+        $dataToInsert = $request->only(['title', 'description', 'brand_id', 'status', 'started_at', 'ended_at', 'is_mystery_brand']);
+        $organization = Survey::create($dataToInsert);
+
+        return Response::json($organization, 201);
     }
 
     /**
@@ -62,8 +96,10 @@ class SurveyController extends Controller
     {
         $validation = Validator::make($request->all(), [
             'title' => 'required|string|min:1|max:255',
-            'image' => 'required|image',
             'description' => 'required|min:1',
+            'is_mystery_brand' => 'bool',
+            'started_at' => 'date_format:Y-m-d H:i:s',
+            'ended_at' => 'date_format:Y-m-d H:i:s',
             'status' => ['required', Rule::in(['draft', 'disable', 'in progress'])],
             'brand_id' => 'required|integer',
         ]);
@@ -71,43 +107,12 @@ class SurveyController extends Controller
         if ($validation->fails())
             return $validation->errors();
 
-        $dataToInsert = $request->only(['title', 'description', 'brand_id', 'status']);
-        $imageName = $this->upload->storeAsset($request, 'image');
-
-        $dataToInsert['image'] = $imageName;
+        $dataToInsert = $request->only(['title', 'description', 'brand_id', 'status', 'started_at', 'ended_at', 'is_mystery_brand']);
         Survey::where('id', $id)->update($dataToInsert);
 
         return Response::json(Survey::where('id', $id)->first(), 200);
     }
 
-
-
-    /**
-     * @param Request $request
-     * @return JsonResponse|\Illuminate\Support\MessageBag
-     **/
-
-    public function store(Request $request)
-    {
-        $validation = Validator::make($request->all(), [
-            'title' => 'required|string|min:1|max:255',
-            'image' => 'required|image',
-            'description' => 'required|min:1',
-            'status' => ['required', Rule::in(['draft', 'disable', 'in progress'])],
-            'brand_id' => 'required|integer',
-        ]);
-
-        if ($validation->fails())
-            return $validation->errors();
-
-        $imageName = $this->upload->storeAsset($request, 'image');
-
-        $dataToInsert = $request->only(['title', 'description', 'brand_id', 'status']);
-        $dataToInsert['image'] = $imageName;
-        $organization = Survey::create($dataToInsert);
-
-        return Response::json($organization, 201);
-    }
 
     /**
      * @param int $id

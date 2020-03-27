@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
-    protected $fillable = ['title', 'multi_choice', 'survey_id'];
+    protected $fillable = ['title', 'multi_choice', 'image', 'survey_id'];
 
     public $timestamps = false;
 

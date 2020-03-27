@@ -40,13 +40,14 @@ class ResponseController extends Controller
         $validation = Validator::make($request->all(), [
             'text' => 'required|string|min:1|max:255',
             'question_id' => 'integer|required',
+            'link_question' => 'nullable|integer'
         ]);
 
         if ($validation->fails())
             return $validation->errors();
 
 
-        $dataToInsert = $request->only(['text', 'question_id']);
+        $dataToInsert = $request->only(['text', 'question_id', 'link_question']);
         $response = ResponseModel::create($dataToInsert);
 
         return Response::json($response, 201);
@@ -62,11 +63,13 @@ class ResponseController extends Controller
         $validation = Validator::make($request->all(), [
             'text' => 'required|string|min:1|max:255',
             'question_id' => 'integer|required',
+            'link_question' => 'nullable|integer'
         ]);
+
         if ($validation->fails())
            return $validation->errors();
 
-        $dataToInsert = $request->only(['text', 'question_id']);
+        $dataToInsert = $request->only(['text', 'question_id', 'link_question']);
         ResponseModel::where('id', $id)->update($dataToInsert);
 
         return Response::json(ResponseModel::where('id', $id)->first(), 200);

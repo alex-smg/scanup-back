@@ -147,7 +147,7 @@ class PersonController extends Controller
             'sub' => $person->id,
             'role' => $person->roles,
             'iat' => time(),
-            'exp' => time() + 60*60
+            'exp' => time() + (60*60)*3
         ];
 
         return JWT::encode($payload, env('JWT_SECRET'));

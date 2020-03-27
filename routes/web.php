@@ -17,6 +17,7 @@ $router->get('/', function () use ($router) {
 
 $router->group(['prefix' => 'api'], function() use($router) {
     $router->post('/login', 'PersonController@login');
+    $router->post('/persons', 'PersonController@store');
 
     $router->group(['middleware' => ['jwt.auth']], function() use ($router) {
         $router->get('/persons', 'PersonController@index');
@@ -40,7 +41,6 @@ $router->group(['prefix' => 'api'], function() use($router) {
 
 
     $router->group(['middleware' => ['jwt.auth', 'role:admin']], function() use ($router) {
-        $router->post('/persons', 'PersonController@store');
         $router->put('/persons/{id}', 'PersonController@update');
         $router->delete('/persons/{id}', 'PersonController@destroy');
 

@@ -17,6 +17,7 @@ class Question extends Resource
         return [
             'id' => $this->id,
             'title' => $this->title,
+            'image' => $this->image,
             'multiChoice' => $this->multi_choice,
             'survey' => $this->survey
         ];

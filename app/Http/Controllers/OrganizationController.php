@@ -46,9 +46,9 @@ class OrganizationController extends Controller
      * @param string $value
      * @return OrganizationResource
      */
-    public function search(string $value)
+    public function search(string $value): AnonymousResourceCollection
     {
-        return Organization::where('name', 'ilike', '%'.$value.'%')->paginate(5);
+        return OrganizationResource::collection(Organization::where('name', 'ilike', '%'.$value.'%')->paginate(5));
     }
 
     /**

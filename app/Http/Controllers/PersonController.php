@@ -36,9 +36,9 @@ class PersonController extends Controller
      * @param string $value
      * @return PersonResource
      */
-    public function search(string $value)
+    public function search(string $value): AnonymousResourceCollection
     {
-        return Person::where('first_name', 'ilike', '%'.$value.'%')->orwhere('last_name', 'ilike', '%'.$value.'%')->paginate(5);
+        return PersonResource::collection(Person::where('first_name', 'ilike', '%'.$value.'%')->orwhere('last_name', 'ilike', '%'.$value.'%')->paginate(5));
     }
 
     /**

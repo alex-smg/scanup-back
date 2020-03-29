@@ -47,9 +47,9 @@ class SurveyController extends Controller
      * @param string $value
      * @return SurveyResource
      */
-    public function search(string $value)
+    public function search(string $value): AnonymousResourceCollection
     {
-        return Survey::where('title', 'ilike', '%'.$value.'%')->paginate(5);
+        return SurveyResource::collection(Survey::where('title', 'ilike', '%'.$value.'%')->paginate(5));
     }
 
     /**

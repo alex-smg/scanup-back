@@ -20,7 +20,9 @@ class Survey extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
-            'image' => $this->image,
+            'started_at' => $this->started_at,
+            'ended_at' => $this->ended_at,
+            'is_mystery_brand' => $this->is_mystery_brand,
             'status' => $this->status,
             'brand' => $this->when(
                 null !== $this->brand_id,

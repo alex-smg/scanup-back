@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "43b8d380-c9f3-4889-9258-acaed616264b",
+		"_postman_id": "509ce8a5-65ae-457b-bd7b-b798b3f81412",
 		"name": "Scan'up",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -204,6 +204,33 @@
 								"api",
 								"organizations",
 								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJsdW1lbi1qd3QiLCJzdWIiOjExLCJyb2xlIjpbeyJpZCI6MiwibmFtZSI6ImFkbWluIiwiZ3VhcmRfbmFtZSI6ImFwaSIsImNyZWF0ZWRfYXQiOiIyMDIwLTAzLTI3IDA5OjQ4OjMwIiwidXBkYXRlZF9hdCI6IjIwMjAtMDMtMjcgMDk6NDg6MzAiLCJwaXZvdCI6eyJtb2RlbF9pZCI6MTEsInJvbGVfaWQiOjIsIm1vZGVsX3R5cGUiOiJBcHBcXFBlcnNvbiJ9fV0sImlhdCI6MTU4NTMwMzg1MiwiZXhwIjoxNTg1MzA3NDUyfQ.N88X1ZEW3RjooYCafzxvxftFQBEvOHTq7TPvm7Ogzos",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost/api/organizations/search/dany",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"organizations",
+								"search",
+								"dany"
 							]
 						}
 					},
@@ -578,6 +605,32 @@
 							"path": [
 								"api",
 								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJsdW1lbi1qd3QiLCJzdWIiOjExLCJyb2xlIjpbeyJpZCI6MiwibmFtZSI6ImFkbWluIiwiZ3VhcmRfbmFtZSI6ImFwaSIsImNyZWF0ZWRfYXQiOiIyMDIwLTAzLTI3IDA5OjQ4OjMwIiwidXBkYXRlZF9hdCI6IjIwMjAtMDMtMjcgMDk6NDg6MzAiLCJwaXZvdCI6eyJtb2RlbF9pZCI6MTEsInJvbGVfaWQiOjIsIm1vZGVsX3R5cGUiOiJBcHBcXFBlcnNvbiJ9fV0sImlhdCI6MTU4NTMwMzg1MiwiZXhwIjoxNTg1MzA3NDUyfQ.N88X1ZEW3RjooYCafzxvxftFQBEvOHTq7TPvm7Ogzos",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost/api/persons/search/Bahringer",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"persons",
+								"search",
+								"Bahringer"
 							]
 						}
 					},

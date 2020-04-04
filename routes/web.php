@@ -22,12 +22,14 @@ $router->group(['prefix' => 'api'], function() use($router) {
     $router->group(['middleware' => ['jwt.auth']], function() use ($router) {
         $router->get('/persons', 'PersonController@index');
         $router->get('/persons/{id}', 'PersonController@show');
+        $router->get('/persons/search/{value}', 'PersonController@search');
 
         $router->get('/questions', 'QuestionController@index');
         $router->get('/questions/{id}', 'QuestionController@show');
 
         $router->get('/organizations', 'OrganizationController@index');
         $router->get('/organizations/{id}', 'OrganizationController@show');
+        $router->get('/organizations/search/{value}', 'OrganizationController@search');
 
         $router->get('/surveys', 'SurveyController@index');
         $router->get('/surveys/{id}', 'SurveyController@show');

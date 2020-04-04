@@ -19,7 +19,7 @@ class PersonController extends Controller
      */
     public function index(): AnonymousResourceCollection
     {
-        return PersonResource::collection(Person::paginate(10));
+        return PersonResource::collection(Person::paginate(5));
     }
 
     /**
@@ -29,6 +29,16 @@ class PersonController extends Controller
     public function show(int $id): PersonResource
     {
         return new PersonResource(Person::find($id));
+    }
+
+    /**
+     * SEARCH BY FIRSTNAME AND LASTNAME OF PERSON
+     * @param string $value
+     * @return PersonResource
+     */
+    public function search(string $value): AnonymousResourceCollection
+    {
+        return PersonResource::collection(Person::where('first_name', 'ilike', '%'.$value.'%')->orwhere('last_name', 'ilike', '%'.$value.'%')->paginate(5));
     }
 
     /**
@@ -137,7 +147,7 @@ class PersonController extends Controller
             'sub' => $person->id,
             'role' => $person->roles,
             'iat' => time(),
-            'exp' => time() + (60*60)*3
+            'exp' => time() + 60*60
         ];
 
         return JWT::encode($payload, env('JWT_SECRET'));

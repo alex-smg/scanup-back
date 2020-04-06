@@ -57,10 +57,15 @@ $app->singleton(
 |
 */
 
+$app->register(Fruitcake\Cors\CorsServiceProvider::class);
+
  $app->middleware([
-     App\Http\Middleware\Cors::class
+//     App\Http\Middleware\Cors::class
+    Fruitcake\Cors\HandleCors::class
  ]);
 
+
+$app->configure('cors');
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
     'permission' => Spatie\Permission\Middlewares\PermissionMiddleware::class,
@@ -107,5 +112,6 @@ $app->router->group([
 });
 
 $app->register(Flipbox\LumenGenerator\LumenGeneratorServiceProvider::class);
+
 
 return $app;

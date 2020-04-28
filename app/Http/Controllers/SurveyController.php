@@ -8,6 +8,7 @@ use App\Person;
 use App\Utils\Upload;
 use App\Survey;
 use Firebase\JWT\JWT;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\{Request, JsonResponse};
 use Illuminate\Support\Facades\{Response, DB, URL, Validator};
@@ -47,7 +48,19 @@ class SurveyController extends Controller
      */
     public function show(int $id): SurveyResource
     {
-        return new SurveyResource(Survey::find($id));
+        $survey = new SurveyResource(Survey::find($id));
+        $responsesArray = $survey->questions->pluck('responses');
+
+        foreach($survey->questions as $question){
+            foreach($responsesArray as $response) {
+                if ($response[0]->question_id === $question->id) {
+                    $question->answers = $response;
+                    break;
+                }
+            }
+        }
+
+        return $survey;
     }
 
     /**

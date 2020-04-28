@@ -17,10 +17,6 @@ class Response extends Resource
         return [
             'id' => $this->id,
             'text' => $this->text,
-            'question' => $this->when(
-                $this->question_id,
-                $this->question
-            ),
             'linkQuestion' => $this->when(
                 $this->link_question,
                 $this->linkQuestion

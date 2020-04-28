@@ -49,16 +49,7 @@ class SurveyController extends Controller
     public function show(int $id): SurveyResource
     {
         $survey = new SurveyResource(Survey::find($id));
-        $responsesArray = $survey->questions->pluck('responses');
-
-        foreach($survey->questions as $question){
-            foreach($responsesArray as $response) {
-                if ($response[0]->question_id === $question->id) {
-                    $question->answers = $response;
-                    break;
-                }
-            }
-        }
+        $survey->questions->pluck('responses');
 
         return $survey;
     }

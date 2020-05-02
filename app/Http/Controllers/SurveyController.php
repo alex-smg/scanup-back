@@ -39,7 +39,7 @@ class SurveyController extends Controller
 
         $person = Person::find($credentials->sub);
 
-        return SurveyResource::collection(Survey::where('brand_id', '=', $person->organization_id)->paginate(5));
+        return SurveyResource::collection(Survey::where('brand_id', '=', $person->organization_id)->orderBy('created_at', 'desc')->paginate(5));
     }
 
     /**

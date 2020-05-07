@@ -18,6 +18,7 @@ $router->get('/', function () use ($router) {
 $router->group(['prefix' => 'api'], function() use($router) {
     $router->post('/login', 'PersonController@login');
     $router->post('/persons', 'PersonController@store');
+    $router->get('/images/{filename}', 'PersonController@image');
 
     $router->group(['middleware' => ['jwt.auth']], function() use ($router) {
         $router->get('/persons', 'PersonController@index');

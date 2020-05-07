@@ -7,6 +7,7 @@ namespace App\Utils;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 
+
 class Upload
 {
     /**
@@ -21,6 +22,7 @@ class Upload
         $image->storeAs('public', $imageName);
         URL::asset($imageName);
 
+//        $request->file($keyName)->move('public', $imageName);
         return $imageName;
     }
 }

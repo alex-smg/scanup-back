@@ -16,8 +16,9 @@ class CreateResponsesTable extends Migration
         Schema::create('responses', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('text');
+            // @TODO Add foreign key on table questions (parent_answer)
             $table->integer('link_question')->unsigned()->nullable();
-            $table->foreign('link_question')->references('id')->on('questions');
+            $table->foreign('link_question')->references('id')->on('questions')->onDelete('set null');
             $table->integer('question_id')->unsigned();
             $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
         });

@@ -9,6 +9,7 @@ use App\Http\Resources\Question as QuestionResource;
 use App\Utils\Upload;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
@@ -52,12 +53,13 @@ class QuestionController extends Controller
     {
         $validation = Validator::make($request->all(), [
             'title' => 'required|string',
-            'multi_choice' => 'boolean',
+            'multi_choice' => Rule::in(['true', 'false']),
             'image' => 'image',
             'survey_id' => 'required|integer'
         ]);
 
         $data = $request->only(['title', 'multi_choice', 'survey_id']);
+        $data['multi_choice'] = $data['multi_choice'] === 'true';
 
         if (null !== $request->file('image')) {
             $imageName = $this->upload->storeAsset($request, 'image');
@@ -81,12 +83,13 @@ class QuestionController extends Controller
     {
         $validation = Validator::make($request->all(), [
             'title' => 'required|string',
-            'multi_choice' => 'boolean',
+            'multi_choice' => Rule::in(['true', 'false']),
             'image' => 'image',
             'survey_id' => 'required|integer'
         ]);
 
         $data = $request->only(['title', 'multi_choice', 'survey_id']);
+        $data['multi_choice'] = $data['multi_choice'] === 'true';
 
         if (null !== $request->file('image')) {
             $imageName = $this->upload->storeAsset($request, 'image');

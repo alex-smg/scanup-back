@@ -20,7 +20,7 @@ class Question extends Resource
             'image' => $this->image,
             'multiChoice' => $this->multi_choice,
             'survey' => $this->survey,
-            'responses' => $this->responses
+            'responses' => $this->responses->orderBy('id', 'ASC')
         ];
     }
 }

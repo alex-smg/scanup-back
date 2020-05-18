@@ -24,11 +24,14 @@ $router->group(['prefix' => 'api'], function() use($router) {
         $router->get('/persons', 'PersonController@index');
         $router->get('/persons/{id}', 'PersonController@show');
         $router->get('/persons/search/{value}', 'PersonController@search');
+        $router->get('/persons/searchOrganisation/{value}', 'PersonController@searchbyOrganisation');
 
         $router->get('/questions', 'QuestionController@index');
         $router->get('/questions/{id}', 'QuestionController@show');
+        $router->get('/questions/search/{value}', 'QuestionController@search');
 
         $router->get('/organizations', 'OrganizationController@index');
+        $router->get('/organizations/views', 'OrganizationController@indexAll');
         $router->get('/organizations/{id}', 'OrganizationController@show');
         $router->get('/organizations/search/{value}', 'OrganizationController@search');
 
@@ -38,6 +41,7 @@ $router->group(['prefix' => 'api'], function() use($router) {
 
         $router->get('/responses', 'ResponseController@index');
         $router->get('/responses/{id}', 'ResponseController@show');
+        $router->get('/responses/search/{value}', 'ResponseController@search');
     });
 
 

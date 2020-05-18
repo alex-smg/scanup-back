@@ -42,6 +42,16 @@ class PersonController extends Controller
     }
 
     /**
+     * SEARCH BY BRAND_ID
+     * @param string $value
+     * @return PersonResource
+     */
+    public function searchbyOrganisation(string $value): AnonymousResourceCollection
+    {
+        return PersonResource::collection(Person::where('organization_id', 'like', $value)->get());
+    }
+
+    /**
      * @param Request $request
      * @return JsonResponse|\Illuminate\Support\MessageBag
      */

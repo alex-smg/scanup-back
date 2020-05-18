@@ -15,11 +15,17 @@ use Illuminate\Validation\Rule;
 class PersonController extends Controller
 {
     /**
+     * @param Request $request
      * @return AnonymousResourceCollection
      */
-    public function index(): AnonymousResourceCollection
+    public function index(Request $request): AnonymousResourceCollection
     {
-        return PersonResource::collection(Person::paginate(5));
+        $token = $request->header('token');
+        $credentials = JWT::decode($token, env('JWT_SECRET'), ['HS256']);
+
+        $person = Person::find($credentials->sub);
+
+        return PersonResource::collection(Person::where('email', '!=', $person->email)->orderBy('created_at', 'desc')->paginate(5));
     }
 
     /**

@@ -46,6 +46,16 @@ class QuestionController extends Controller
     }
 
     /**
+     * SEARCH BY survey_id OF question
+     * @param string $value
+     * @return SurveyResourceResource
+     */
+    public function search(string $value): AnonymousResourceCollection
+    {
+        return QuestionResource::collection(Question::where('survey_id', 'like', $value)->get());
+    }
+
+    /**
      * @param Request $request
      * @return JsonResponse|\Illuminate\Support\MessageBag
      */

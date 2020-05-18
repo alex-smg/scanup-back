@@ -8,7 +8,6 @@ use App\Person;
 use App\Utils\Upload;
 use App\Survey;
 use Firebase\JWT\JWT;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\{Request, JsonResponse};
 use Illuminate\Support\Facades\{Response, DB, URL, Validator};

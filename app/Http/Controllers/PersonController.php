@@ -103,8 +103,13 @@ class PersonController extends Controller
         if ($validation->fails())
             return $validation->errors();
 
-        $payload= $request->only(['first_name', 'last_name', 'email', 'organization_id', 'password']);
-        $payload['password'] = Hash::make($request->input('password'));
+        $payload = $request->only(['first_name', 'last_name', 'email', 'organization_id']);
+
+
+        if (null !== $request->input('password')) {
+            $payload['password'] = Hash::make($request->input('password'));
+        }
+
 
         Person::where('id', $id)->update($payload);
         $person = Person::where('id', $id)->first();

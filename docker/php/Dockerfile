@@ -2,7 +2,6 @@ FROM php:7.3-fpm
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-
 WORKDIR /var/www
 
 RUN apt-get update && apt-get install -y libpq-dev sudo \
@@ -18,6 +17,7 @@ COPY . /var/www
 COPY --chown=www:www . /var/www
 USER www
 
+COPY php.ini /usr/local/etc/php
 
 EXPOSE 9000
 CMD ["php-fpm"]

@@ -7,7 +7,7 @@ namespace App\Http\Controllers;
 use App\Person;
 use Firebase\JWT\JWT;
 use Illuminate\Http\{Request, JsonResponse};
-use Illuminate\Support\Facades\{DB, Hash, Response, Validator};
+use Illuminate\Support\Facades\{DB, File, Hash, Response, Validator};
 use App\Http\Resources\Person as PersonResource;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Validation\Rule;
@@ -157,7 +157,7 @@ class PersonController extends Controller
             'sub' => $person->id,
             'role' => $person->roles,
             'iat' => time(),
-            'exp' => time() + 60*60
+            'exp' => time() + 60*60*24
         ];
 
         return JWT::encode($payload, env('JWT_SECRET'));

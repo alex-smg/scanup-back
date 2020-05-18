@@ -17,7 +17,7 @@ class Question extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function response()
+    public function responses()
     {
         return $this->hasMany('App\Response', 'question_id');
     }

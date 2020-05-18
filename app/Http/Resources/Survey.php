@@ -28,6 +28,7 @@ class Survey extends JsonResource
                 null !== $this->brand_id,
                 $this->brand
             ),
+            'question' => $this->question,
             'createdAt' => $this->created_at,
             'updatedAt' => $this->updated_at,
         ];

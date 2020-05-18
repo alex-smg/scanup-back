@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\Survey as SurveyResource;
 use App\Response as ResponseModel;
+use App\Survey;
 use Illuminate\Http\{Request, JsonResponse};
 use Illuminate\Support\Facades\{DB, URL, Validator, Response};
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -28,6 +30,16 @@ class ResponseController extends Controller
     public function show(int $id): ResponseResource
     {
         return new ResponseResource(ResponseModel::find($id));
+    }
+
+    /**
+     * SEARCH BY brand_id OF SURVEY
+     * @param string $value
+     * @return SurveyResourceResource
+     */
+    public function search(string $value): AnonymousResourceCollection
+    {
+        return ResponseResource::collection(Survey::where('brand_id', 'like', $value)->get());
     }
 
     /**

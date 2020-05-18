@@ -14,4 +14,11 @@ class Question extends Model
     {
         return $this->belongsTo('App\Survey');
     }
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function response()
+    {
+        return $this->hasMany('App\Response', 'question_id');
+    }
 }

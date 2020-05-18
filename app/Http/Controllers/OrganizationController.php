@@ -33,6 +33,14 @@ class OrganizationController extends Controller
     }
 
     /**
+     * @return AnonymousResourceCollection
+     */
+    public function indexAll(): AnonymousResourceCollection
+    {
+        return OrganizationResource::collection(Organization::all());
+    }
+
+    /**
      * @param int $id
      * @return OrganizationResource
      */

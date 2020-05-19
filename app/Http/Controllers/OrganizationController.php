@@ -39,7 +39,7 @@ class OrganizationController extends Controller
      */
     public function indexAll(): AnonymousResourceCollection
     {
-        return OrganizationResource::collection(Organization::all());
+        return OrganizationResource::collection(Organization::orderBy('name')->get());
     }
 
     /**

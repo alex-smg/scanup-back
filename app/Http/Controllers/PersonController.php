@@ -35,8 +35,11 @@ class PersonController extends Controller
     public function show(int $id)
     {
         $person = Person::find($id);
-
         $person->roles = $person->getRoleNames();
+        $person->firstName = $person->first_name;
+        $person->lastName = $person->last_name;
+        $person->organization = $person->organization;
+        $person->password = '';
 
         return $person;
     }

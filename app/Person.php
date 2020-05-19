@@ -20,4 +20,5 @@ class Person extends Model implements Authenticatable
     {
         return $this->belongsTo('App\Organization');
     }
+
 }

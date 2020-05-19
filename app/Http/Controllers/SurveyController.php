@@ -8,7 +8,6 @@ use App\Person;
 use App\Utils\Upload;
 use App\Survey;
 use Firebase\JWT\JWT;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\{Request, JsonResponse};
 use Illuminate\Support\Facades\{Response, DB, URL, Validator};
@@ -61,7 +60,7 @@ class SurveyController extends Controller
      */
     public function search(string $value): AnonymousResourceCollection
     {
-        return SurveyResource::collection(Survey::where('title', 'ilike', '%'.$value.'%')->paginate(5));
+        return SurveyResource::collection(Survey::where('title', 'like', '%'.$value.'%')->paginate(5));
     }
 
     /**
@@ -75,8 +74,8 @@ class SurveyController extends Controller
             'title' => 'required|string|min:10|max:255',
             'description' => 'required|min:10',
             'is_mystery_brand' => 'bool',
-            'started_at' => 'date_format:Y-m-d H:i:s',
-            'ended_at' => 'date_format:Y-m-d H:i:s',
+            'started_at' => 'date',
+            'ended_at' => 'date',
             'status' => ['required', Rule::in(['draft', 'disable', 'in progress'])],
             'brand_id' => 'required|integer',
         ]);
@@ -102,8 +101,8 @@ class SurveyController extends Controller
             'title' => 'required|string|min:1|max:255',
             'description' => 'required|min:1',
             'is_mystery_brand' => 'bool',
-            'started_at' => 'date_format:Y-m-d H:i:s',
-            'ended_at' => 'date_format:Y-m-d H:i:s',
+            'started_at' => 'date',
+            'ended_at' => 'date',
             'status' => ['required', Rule::in(['draft', 'disable', 'in progress'])],
             'brand_id' => 'required|integer',
         ]);

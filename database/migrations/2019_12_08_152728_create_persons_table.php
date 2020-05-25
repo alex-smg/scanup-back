@@ -19,7 +19,7 @@ class CreatePersonsTable extends Migration
             $table->string('last_name', 40);
             $table->string('email')->unique();
             $table->string('password');
-            $table->integer('organization_id')->unsigned();
+            $table->integer('organization_id')->unsigned()->nullable();
             $table->foreign('organization_id')->references('id')->on('organizations');
             $table->timestamps();
             $table->softDeletes();

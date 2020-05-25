@@ -75,8 +75,7 @@ class PersonController extends Controller
             'last_name' => 'required|string',
             'email' => 'required|email',
             'role' => ['required', Rule::in(['super-admin', 'admin', 'moderator', 'viewer'])],
-            'password' => 'required|string',
-            'organization_id' => 'required'
+            'password' => 'required|string'
         ]);
 
         if ($validation->fails())

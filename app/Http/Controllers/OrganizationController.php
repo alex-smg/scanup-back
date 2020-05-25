@@ -121,10 +121,8 @@ class OrganizationController extends Controller
 
         $dataToInsert = $request->only(['name', 'description', 'status', 'parent_id']);
 
-        if ($request->input('logo')) {
-            $imageName = $this->upload->storeAsset($request, 'logo');
-            $dataToInsert['logo'] = $imageName;
-        }
+        $imageName = $this->upload->storeAsset($request, 'logo');
+        $dataToInsert['logo'] = $imageName;
 
         Organization::where('id', $id)->update($dataToInsert);
 

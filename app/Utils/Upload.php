@@ -15,8 +15,6 @@ class Upload
      * @return bool
      */
     public function storeAsset(Request $request, string $keyName)
-
-
     {
         $image = $request->file($keyName);
         $imageName = Storage::put('storage', $image);
@@ -24,8 +22,3 @@ class Upload
         return $imageName;
     }
 }
-
-
-//        $image->storeAs('public', $imageName);
-//        URL::asset($imageName);
-//        $request->file($keyName)->move('public', $imageName);

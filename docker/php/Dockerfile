@@ -4,7 +4,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www
 
-RUN apt-get update && apt-get install -y libpq-dev sudo \
+RUN apt-get update && apt-get install -y git libpq-dev sudo \
 	&& docker-php-ext-install pdo pdo_pgsql
 
 RUN pecl install xdebug \

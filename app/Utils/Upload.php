@@ -5,22 +5,27 @@ declare(strict_types=1);
 namespace App\Utils;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Storage;
 
 class Upload
 {
     /**
      * @param Request $request
      * @param string $keyName
-     * @return string
+     * @return bool
      */
-    public function storeAsset(Request $request, string $keyName): string
+    public function storeAsset(Request $request, string $keyName)
+
+
     {
         $image = $request->file($keyName);
-        $imageName = 'storage/' . time().'.'.$image->getClientOriginalExtension();
-        $image->storeAs('public', $imageName);
-        URL::asset($imageName);
+        $imageName = Storage::put('storage', $image);
 
         return $imageName;
     }
 }
+
+
+//        $image->storeAs('public', $imageName);
+//        URL::asset($imageName);
+//        $request->file($keyName)->move('public', $imageName);

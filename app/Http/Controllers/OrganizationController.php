@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Person;
 use App\Utils\Upload;
 use App\Organization;
+use Firebase\JWT\JWT;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\{Request, JsonResponse};
 use Illuminate\Support\Facades\{Response, DB, URL, Validator};
@@ -37,7 +39,7 @@ class OrganizationController extends Controller
      */
     public function indexAll(): AnonymousResourceCollection
     {
-        return OrganizationResource::collection(Organization::all());
+        return OrganizationResource::collection(Organization::orderBy('name')->get());
     }
 
     /**

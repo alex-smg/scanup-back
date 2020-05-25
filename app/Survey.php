@@ -18,8 +18,9 @@ class Survey extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function question()
+    public function questions()
     {
         return $this->hasMany('App\Question', 'survey_id');
     }
+
 }

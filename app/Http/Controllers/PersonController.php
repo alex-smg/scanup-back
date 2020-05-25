@@ -7,7 +7,7 @@ namespace App\Http\Controllers;
 use App\Person;
 use Firebase\JWT\JWT;
 use Illuminate\Http\{Request, JsonResponse};
-use Illuminate\Support\Facades\{DB, Hash, Response, Validator};
+use Illuminate\Support\Facades\{DB, File, Hash, Response, Validator};
 use App\Http\Resources\Person as PersonResource;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Validation\Rule;
@@ -15,20 +15,33 @@ use Illuminate\Validation\Rule;
 class PersonController extends Controller
 {
     /**
+     * @param Request $request
      * @return AnonymousResourceCollection
      */
-    public function index(): AnonymousResourceCollection
+    public function index(Request $request): AnonymousResourceCollection
     {
-        return PersonResource::collection(Person::paginate(5));
+        $token = $request->header('token');
+        $credentials = JWT::decode($token, env('JWT_SECRET'), ['HS256']);
+
+        $person = Person::find($credentials->sub);
+
+        return PersonResource::collection(Person::where('email', '!=', $person->email)->orderBy('created_at', 'desc')->paginate(5));
     }
 
     /**
      * @param int $id
-     * @return PersonResource
+     * @return mixed
      */
-    public function show(int $id): PersonResource
+    public function show(int $id)
     {
-        return new PersonResource(Person::find($id));
+        $person = Person::find($id);
+        $person->roles = $person->getRoleNames();
+        $person->firstName = $person->first_name;
+        $person->lastName = $person->last_name;
+        $person->organization = $person->organization;
+        $person->password = '';
+
+        return $person;
     }
 
     /**
@@ -38,7 +51,7 @@ class PersonController extends Controller
      */
     public function search(string $value): AnonymousResourceCollection
     {
-        return PersonResource::collection(Person::where('first_name', 'ilike', '%'.$value.'%')->orwhere('last_name', 'ilike', '%'.$value.'%')->paginate(5));
+        return PersonResource::collection(Person::where('first_name', 'like', '%'.$value.'%')->orwhere('last_name', 'like', '%'.$value.'%')->paginate(5));
     }
 
     /**
@@ -90,15 +103,20 @@ class PersonController extends Controller
             'last_name' => 'required',
             'email' => 'required|email|max:255',
             'role' => ['required', Rule::in(['super-admin', 'admin', 'moderator', 'viewer'])],
-            'password' => 'required|string',
+            'password' => 'string',
             'organization_id' => 'required',
         ]);
 
         if ($validation->fails())
             return $validation->errors();
 
-        $payload= $request->only(['first_name', 'last_name', 'email', 'organization_id', 'password']);
-        $payload['password'] = Hash::make($request->input('password'));
+        $payload = $request->only(['first_name', 'last_name', 'email', 'organization_id']);
+
+
+        if (null !== $request->input('password')) {
+            $payload['password'] = Hash::make($request->input('password'));
+        }
+
 
         Person::where('id', $id)->update($payload);
         $person = Person::where('id', $id)->first();
@@ -157,7 +175,7 @@ class PersonController extends Controller
             'sub' => $person->id,
             'role' => $person->roles,
             'iat' => time(),
-            'exp' => time() + 60*60
+            'exp' => time() + 60*60*24
         ];
 
         return JWT::encode($payload, env('JWT_SECRET'));

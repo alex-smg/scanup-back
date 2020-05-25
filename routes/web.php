@@ -53,7 +53,7 @@ $router->group(['prefix' => 'api'], function() use($router) {
         $router->delete('/questions/{id}', 'QuestionController@destroy');
 
         $router->post('/organizations', 'OrganizationController@store');
-        $router->put('/organizations/{id}', 'OrganizationController@update');
+        $router->post('/organizations/{id}', 'OrganizationController@update');
         $router->delete('/organizations/{id}', 'OrganizationController@destroy');
 
         $router->delete('/surveys/{id}', 'SurveyController@destroy');

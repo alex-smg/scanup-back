@@ -84,8 +84,6 @@ class OrganizationController extends Controller
                 return Response::json(reset($checkStatus), key($checkStatus));
         }
 
-        if ($request->logo)
-
         $imageName = $this->upload->storeAsset($request, 'logo');
 
         $dataToInsert = $request->only(['name', 'description', 'status', 'parent_id']);
@@ -121,8 +119,10 @@ class OrganizationController extends Controller
 
         $dataToInsert = $request->only(['name', 'description', 'status', 'parent_id']);
 
-        $imageName = $this->upload->storeAsset($request, 'logo');
-        $dataToInsert['logo'] = $imageName;
+        if ($request->file('logo')) {
+            $imageName = $this->upload->storeAsset($request, 'logo');
+            $dataToInsert['logo'] = $imageName;
+        }
 
         Organization::where('id', $id)->update($dataToInsert);
 

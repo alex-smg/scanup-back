@@ -31,7 +31,7 @@ class OrganizationController extends Controller
      */
     public function index(): AnonymousResourceCollection
     {
-        return OrganizationResource::collection(Organization::paginate(5));
+        return OrganizationResource::collection(Organization::orderBy('created_at', 'desc')->paginate(5));
     }
 
     /**

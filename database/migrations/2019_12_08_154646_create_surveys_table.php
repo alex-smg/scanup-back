@@ -22,7 +22,7 @@ class CreateSurveysTable extends Migration
             $table->boolean('is_mystery_brand')->default(false);
             $table->enum('status', ['draft', 'disable', 'in progress']);
             $table->integer('brand_id');
-            $table->foreign('brand_id')->references('id')->on('organizations');
+            $table->foreign('brand_id')->references('id')->on('organizations')->onDelete('cascade');
             $table->timestamps();
         });
     }

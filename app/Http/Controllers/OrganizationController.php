@@ -150,9 +150,9 @@ class OrganizationController extends Controller
     private function checkParentAndStatus(Request $request)
     {
         $inputStatus = $request->input('status');
-        if ('organization' === $inputStatus) {
+        /*if ('organization' === $inputStatus) {
             throw new \Exception('You can\'t have an entity over an organization');
-        }
+        }*/
         $parentOrganization = Organization::find($request->input('parent_id'));
         if (null === $parentOrganization) {
             return [400 => 'The organization parent is not found'];

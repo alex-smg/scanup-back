@@ -16,6 +16,9 @@ Run the containers
 make start
 ```
 
+## To do
+* Modifier le schema de base de donne comme telle : Supprimer le champ `link_question` dans la table `responses` et le remplacer par le champ `parent_answer` dans la table `questions`
+
 ## Urls
 
 * [Application](http://localhost/)
